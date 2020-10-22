@@ -6,8 +6,7 @@ public class PointOfInterest {
     private Marker googleMarker;
     private String name;
 
-    public PointOfInterest(Marker googleMarker, String name)
-    {
+    public PointOfInterest(Marker googleMarker, String name) {
         this.googleMarker = googleMarker;
         this.name = name;
     }
