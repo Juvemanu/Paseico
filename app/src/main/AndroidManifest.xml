@@ -22,7 +22,7 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".RouteFeedActivity">
+        <activity android:name=".MainMapActivity">
         </activity>
         <activity android:name=".CreateNewRouteActivity">
         </activity>
@@ -39,7 +39,7 @@
                 android:value="@string/google_maps_key"/>
 
         <activity
-                android:name=".MainMapActivity"
+                android:name=".RouteFeedActivity"
                 android:label="@string/title_activity_main_map">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
