@@ -1,8 +1,12 @@
 package app.paseico;
 
+import android.Manifest;
 import android.content.Intent;
+
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -50,8 +54,8 @@ public class MainMapActivity extends FragmentActivity implements OnMapReadyCallb
         updateCreatedRoutesListView();
     }
 
-    private void updateCreatedRoutesListView(){
-        createdRoutesListViewAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,createdRoutes);
+    private void updateCreatedRoutesListView() {
+        createdRoutesListViewAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, createdRoutes);
         createdRoutesListView.setAdapter(createdRoutesListViewAdapter);
     }
 
@@ -66,6 +70,13 @@ public class MainMapActivity extends FragmentActivity implements OnMapReadyCallb
     @Override
     public void onMapReady(GoogleMap googleMap) {
         LatLng valenciaCathedral = new LatLng(39.47, -0.38);
+        /*
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        } else {
+            googleMap.setMyLocationEnabled(true);
+        }*/
 
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(valenciaCathedral));
         googleMap.moveCamera(CameraUpdateFactory.zoomTo(15));
