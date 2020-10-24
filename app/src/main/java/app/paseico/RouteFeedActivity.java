@@ -5,21 +5,28 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import app.paseico.data.Route;
 import app.paseico.service.FirebaseService;
 import app.paseico.service.RouteFeedAdapter;
 import com.squareup.okhttp.internal.http.RouteException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RouteFeedActivity extends AppCompatActivity {
 
     private RecyclerView routesFeed;
 
     //Lo que se le pasa a la lista
-    private static final int LISTA_NUMEROS = 100;
+
+    FirebaseService res = new FirebaseService();
+
+    private ArrayList<String> routes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_route_feed);
 
         routesFeed = (RecyclerView) findViewById(R.id.routes_feed_recyclerView);
 
@@ -32,12 +39,12 @@ public class RouteFeedActivity extends AppCompatActivity {
         routesFeed.setHasFixedSize(true);
 
         //Adaptador: quien le pasa los datos al recycler view
-        RouteFeedAdapter adapter = new RouteFeedAdapter(LISTA_NUMEROS);
+        System.out.println(routes  + " <<<<<<<<<ESTE ES EL VALOR DE ROUTES EN ROUTEFEEDACTIVITY");
+        RouteFeedAdapter adapter = new RouteFeedAdapter(routes);
 
         //Añadir el adapter al recyclerview
         routesFeed.setAdapter(adapter);
 
-        FirebaseService.getAllRoutes();
-        FirebaseService.getRoutesAttribute("name");
+        //FirebaseService.getRoutesAttribute("name");
     }
 }

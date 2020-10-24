@@ -12,6 +12,7 @@ import java.util.List;
 
 
 public class FirebaseService{
+    public ArrayList<String> routesAttributes = new ArrayList<>();
 
     public static String saveRoute(Route route) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -38,9 +39,8 @@ public class FirebaseService{
                 });;
     }
 
-    public static List<String> getRoutesAttribute(String attribute){
+    public void getRoutesAttribute(String attribute){
         FirebaseFirestore database = FirebaseFirestore.getInstance();
-        List<String> routesAttributes = new ArrayList<>();
         database.collection("route")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -50,14 +50,14 @@ public class FirebaseService{
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 String recievedAttribute = (String) document.getData().get(attribute);
                                 Log.d("ROUTE NAME", document.getId() + " => " + recievedAttribute);
+                                System.out.println(recievedAttribute + "ESTE ES EL ATRIBUTO RECIBIDO STRING");
                                 routesAttributes.add(recievedAttribute);
                             }
                         }else{
                             Log.d("ERROR", "Error getting documents: ", task.getException());
                         }
                     }
-                });;
-        return routesAttributes;
+                });
     }
 
 }

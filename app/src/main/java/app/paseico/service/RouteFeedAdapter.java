@@ -8,16 +8,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import app.paseico.R;
+import app.paseico.data.Route;
+
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RouteFeedAdapter extends RecyclerView.Adapter<RouteFeedAdapter.RouteFeedViewHolder>  {
 
-    private int mNumerosItems;
+    private ArrayList<String> routes = new ArrayList<String>();
 
-    public RouteFeedAdapter(int numeroDeItems) {
-
-        mNumerosItems = numeroDeItems;
-
+    public RouteFeedAdapter(ArrayList<String> sentroutes) {
+        routes = sentroutes;
+        System.out.println("1111111111111111111111111111111111111111111111111111111111111111111111111111");
+        System.out.println(routes);
     }
 
 
@@ -42,7 +47,7 @@ public class RouteFeedAdapter extends RecyclerView.Adapter<RouteFeedAdapter.Rout
 
     @Override
     public int getItemCount() {
-        return mNumerosItems;
+        return routes.size();
     }
 
     //Crear el view holder
@@ -59,7 +64,7 @@ public class RouteFeedAdapter extends RecyclerView.Adapter<RouteFeedAdapter.Rout
         }
 
         void Bind(int listaIndex) {
-            mTvListaNumerosView.setText(String.valueOf(listaIndex));
+            mTvListaNumerosView.setText(routes.get(listaIndex));
         }
     }
 
