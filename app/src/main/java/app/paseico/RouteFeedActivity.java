@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import app.paseico.service.FirebaseService;
 import app.paseico.service.RouteFeedAdapter;
 import com.squareup.okhttp.internal.http.RouteException;
 
@@ -35,5 +36,8 @@ public class RouteFeedActivity extends AppCompatActivity {
 
         //Añadir el adapter al recyclerview
         routesFeed.setAdapter(adapter);
+
+        FirebaseService.getAllRoutes();
+        FirebaseService.getRoutesAttribute("name");
     }
 }
