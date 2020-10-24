@@ -13,58 +13,47 @@ import app.paseico.data.Route;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class RouteFeedAdapter extends RecyclerView.Adapter<RouteFeedAdapter.RouteFeedViewHolder>  {
+    private ArrayList<Route> routeList = new ArrayList<>();
+    private int resource;
 
-    private ArrayList<String> routes = new ArrayList<String>();
-
-    public RouteFeedAdapter(ArrayList<String> sentroutes) {
-        routes = sentroutes;
-        System.out.println("1111111111111111111111111111111111111111111111111111111111111111111111111111");
-        System.out.println(routes);
+    public RouteFeedAdapter(ArrayList<Route> routeList, int resource) {
+        this.routeList = routeList;
+        this.resource = resource;
     }
-
 
     @NotNull
     @Override
     public RouteFeedViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        int layoutIdForListItem = R.layout.route_feed_row;
-        LayoutInflater inflater = LayoutInflater.from(context);
-
-        View view = inflater.inflate(layoutIdForListItem, parent, false);
-
-        RouteFeedViewHolder viewHolder = new RouteFeedViewHolder(view);
-
-        return viewHolder;
+        View view = LayoutInflater.from(parent.getContext()).inflate(resource, parent,false);
+        return new RouteFeedViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NotNull RouteFeedAdapter.RouteFeedViewHolder holder, int position) {
-        holder.Bind(position);
+        Route route = routeList.get(position);
+        holder.textViewRoute.setText(route.getName());
     }
 
     @Override
     public int getItemCount() {
-        return routes.size();
+        return routeList.size();
     }
 
-    //Crear el view holder
+    public class RouteFeedViewHolder extends RecyclerView.ViewHolder {
 
+        TextView textViewRoute;
+        public View view;
 
-    class RouteFeedViewHolder extends RecyclerView.ViewHolder {
-
-        TextView mTvListaNumerosView;
-
-        public RouteFeedViewHolder(View itemView) {
-            super(itemView);
-
-            mTvListaNumerosView = itemView.findViewById(R.id.route_list);
+        public RouteFeedViewHolder(View view) {
+            super(view);
+            this.view = view;
+            this.textViewRoute = (TextView) view.findViewById(R.id.route_title);
         }
 
         void Bind(int listaIndex) {
-            mTvListaNumerosView.setText(routes.get(listaIndex));
+            textViewRoute.setText(String.valueOf(listaIndex));
         }
     }
 
