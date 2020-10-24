@@ -20,15 +20,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.okhttp.internal.http.RouteException;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class RouteFeedActivity extends AppCompatActivity {
 
     private Button mBtnData;
 
-    //Lo que se le pasa a la lista
-    private static final int LISTA_NUMEROS = 100;
-    private static final List<String> routesNames = FirebaseService.getRoutesAttribute("name"); ;
+    private DatabaseReference mDatabase;
+    private RouteFeedAdapter mAdapter;
+    private RecyclerView routesFeed;
+    private ArrayList<Route> mRouteList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +42,24 @@ public class RouteFeedActivity extends AppCompatActivity {
         getRoutesFromFirebase();
     }
 
-        //Adaptador: quien le pasa los datos al recycler view
-        RouteFeedAdapter adapter = new RouteFeedAdapter(routesNames, R.layout.route_feed_row);
+    private void getRoutesFromFirebase(){
+        mDatabase.child("routes").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    for(DataSnapshot ds: snapshot.getChildren()){
+                        String name = ds.child("name").getValue().toString();
+                        mRouteList.add(new Route(name, new ArrayList<PointOfInterest>())); //CORREGIR QUE IMPRIMA LOS PUNTOS DE LA RUTA EN CUESTION
+                    }
+                    mAdapter = new RouteFeedAdapter(mRouteList, R.layout.route_feed_row);
+                    routesFeed.setAdapter(mAdapter);
+                }
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
-        FirebaseService.getRoutesAttribute("name");
+            }
+        });
     }
 }

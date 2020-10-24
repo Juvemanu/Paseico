@@ -1,7 +1,6 @@
 package app.paseico.service;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,49 +8,40 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import app.paseico.R;
+import app.paseico.data.Route;
+
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class RouteFeedAdapter extends RecyclerView.Adapter<RouteFeedAdapter.RouteFeedViewHolder>  {
-
-    private final List<String> routeNameList;
+    private ArrayList<Route> routeList = new ArrayList<>();
     private int resource;
 
-    public RouteFeedAdapter(List<String> list, int resource) {
-        routeNameList = list;
+    public RouteFeedAdapter(ArrayList<Route> routeList, int resource) {
+        this.routeList = routeList;
         this.resource = resource;
     }
 
     @NotNull
     @Override
     public RouteFeedViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        int layoutIdForListItem = R.layout.route_feed_row;
-        LayoutInflater inflater = LayoutInflater.from(context);
-
-        View view = inflater.inflate(resource, parent, false);
-
-        RouteFeedViewHolder viewHolder = new RouteFeedViewHolder(view);
-
-        return viewHolder;
+        View view = LayoutInflater.from(parent.getContext()).inflate(resource, parent,false);
+        return new RouteFeedViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NotNull RouteFeedAdapter.RouteFeedViewHolder holder, int position) {
-        String name = routeNameList.get(position);
-        Log.d("NOMBRE", name);
-        holder.Bind(name);
+        Route route = routeList.get(position);
+        holder.textViewRoute.setText(route.getName());
     }
 
     @Override
     public int getItemCount() {
-        return routeNameList.size();
+        return routeList.size();
     }
 
-    //Crear el view holder
-    class RouteFeedViewHolder extends RecyclerView.ViewHolder {
-        TextView mTvListaNumerosView;
+    public class RouteFeedViewHolder extends RecyclerView.ViewHolder {
 
         TextView textViewRoute;
         public View view;
@@ -61,8 +51,10 @@ public class RouteFeedAdapter extends RecyclerView.Adapter<RouteFeedAdapter.Rout
             this.view = view;
             this.textViewRoute = (TextView) view.findViewById(R.id.route_title);
         }
-        void Bind(String text) {
-            mTvListaNumerosView.setText(text);
+
+        void Bind(int listaIndex) {
+            textViewRoute.setText(String.valueOf(listaIndex));
         }
     }
+
 }

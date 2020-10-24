@@ -17,7 +17,7 @@ public class FirebaseService{
     public static String saveRoute(Route route) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("route").add(route);
-        return "Route " + route.getName() + " succesfully added to Firebase";
+        return "Route " + route.getName() + " succesfully added to Firebase.";
     }
 
 
@@ -36,7 +36,7 @@ public class FirebaseService{
                             Log.d("ERROR", "Error getting documents: ", task.getException());
                         }
                     }
-                });
+                });;
     }
 
     public void getRoutesAttribute(String attribute){
@@ -53,18 +53,11 @@ public class FirebaseService{
                                 System.out.println(recievedAttribute + "ESTE ES EL ATRIBUTO RECIBIDO STRING");
                                 routesAttributes.add(recievedAttribute);
                             }
-
                         }else{
                             Log.d("ERROR", "Error getting documents: ", task.getException());
                         }
                     }
-                });;
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return routesAttributes;
+                });
     }
 
 }
