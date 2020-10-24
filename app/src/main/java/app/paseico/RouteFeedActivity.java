@@ -1,65 +1,50 @@
 package app.paseico;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Button;
-
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import app.paseico.data.PointOfInterest;
 import app.paseico.data.Route;
 import app.paseico.service.FirebaseService;
 import app.paseico.service.RouteFeedAdapter;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.okhttp.internal.http.RouteException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RouteFeedActivity extends AppCompatActivity {
 
-    private Button mBtnData;
-
-    private DatabaseReference mDatabase;
-    private RouteFeedAdapter mAdapter;
     private RecyclerView routesFeed;
-    private ArrayList<Route> mRouteList = new ArrayList<>();
+
+    //Lo que se le pasa a la lista
+
+    FirebaseService res = new FirebaseService();
+
+    private ArrayList<String> routes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         routesFeed = (RecyclerView) findViewById(R.id.routes_feed_recyclerView);
-        routesFeed.setLayoutManager(new LinearLayoutManager(this));
-        mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        getRoutesFromFirebase();
-    }
+        //Añadir separadores
+        routesFeed.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
-    private void getRoutesFromFirebase(){
-        mDatabase.child("routes").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    for(DataSnapshot ds: snapshot.getChildren()){
-                        String name = ds.child("name").getValue().toString();
-                        mRouteList.add(new Route(name, new ArrayList<PointOfInterest>())); //CORREGIR QUE IMPRIMA LOS PUNTOS DE LA RUTA EN CUESTION
-                    }
-                    mAdapter = new RouteFeedAdapter(mRouteList, R.layout.route_feed_row);
-                    routesFeed.setAdapter(mAdapter);
-                }
-            }
+        //Convertirlo en una lista
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        routesFeed.setLayoutManager(linearLayoutManager);
+        routesFeed.setHasFixedSize(true);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+        //Adaptador: quien le pasa los datos al recycler view
+        System.out.println(routes  + " <<<<<<<<<ESTE ES EL VALOR DE ROUTES EN ROUTEFEEDACTIVITY");
+        RouteFeedAdapter adapter = new RouteFeedAdapter(routes);
 
-            }
-        });
+        //Añadir el adapter al recyclerview
+        routesFeed.setAdapter(adapter);
+
+        //FirebaseService.getRoutesAttribute("name");
     }
 }
