@@ -27,7 +27,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     GoogleMap map;
     Marker marker;
-    static final LatLng EXAMPLE = new LatLng(37.380346, -6.007743);
+    static final LatLng EXAMPLE = new LatLng(39.469473, -0.371751);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,27 +41,26 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-        map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
         map.animateCamera(CameraUpdateFactory.zoomTo(13f));
 
         Marker marker = map.addMarker(new MarkerOptions()
                 .position(EXAMPLE)
                 .draggable(true)
         );
-        getInfoWindow(EXAMPLE.latitude, EXAMPLE.longitude, marker);
+        getInfoWindow(marker);
         map.setInfoWindowAdapter(new UserInfoWindowAdapter(getLayoutInflater()));
         map.setOnInfoWindowClickListener(this);
         map.moveCamera(CameraUpdateFactory.newLatLng(EXAMPLE));
     }
 
-    public void getInfoWindow(double lat, double lng, Marker marker){
+    public void getInfoWindow(Marker marker){
         Geocoder geocoder;
         List<Address> addresses;
         String title = "";
         String city = "";
         geocoder = new Geocoder(this, Locale.getDefault());
         try{
-            addresses = geocoder.getFromLocation(EXAMPLE.latitude, EXAMPLE.longitude, 1);
+            addresses = geocoder.getFromLocation(marker.getPosition().latitude, marker.getPosition().longitude, 1);
             Address place = addresses.get(0);
             title = place.getLocality();
             city = place.getAddressLine(0);
@@ -76,7 +75,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onInfoWindowClick(Marker marker) {
         Toast.makeText(this, "Redirigiendo a Google Maps", Toast.LENGTH_LONG).show();
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com?q=" + EXAMPLE.latitude +"," + EXAMPLE.longitude));
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com?q=" + marker.getPosition().latitude + "," + marker.getPosition().longitude));
         startActivity(browserIntent);
     }
 }
