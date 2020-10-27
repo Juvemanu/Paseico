@@ -27,7 +27,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     GoogleMap map;
     Marker marker;
-    static final LatLng EXAMPLE = new LatLng(39.469473, -0.371751);
+    static final LatLng EXAMPLE = new LatLng(39.46945815285248, -0.3717630753705533);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,28 +41,26 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-        map.animateCamera(CameraUpdateFactory.zoomTo(13f));
-
         Marker marker = map.addMarker(new MarkerOptions()
                 .position(EXAMPLE)
-                .draggable(true)
         );
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(EXAMPLE,18),5000,null); //animation
         getInfoWindow(marker);
         map.setInfoWindowAdapter(new UserInfoWindowAdapter(getLayoutInflater()));
         map.setOnInfoWindowClickListener(this);
-        map.moveCamera(CameraUpdateFactory.newLatLng(EXAMPLE));
+        //map.moveCamera(CameraUpdateFactory.newLatLng(EXAMPLE));
     }
 
     public void getInfoWindow(Marker marker){
         Geocoder geocoder;
         List<Address> addresses;
-        String title = "";
+        String title = "Starbuck Coffee";
         String city = "";
         geocoder = new Geocoder(this, Locale.getDefault());
         try{
             addresses = geocoder.getFromLocation(marker.getPosition().latitude, marker.getPosition().longitude, 1);
             Address place = addresses.get(0);
-            title = place.getLocality();
+            //title = place.getLocality();
             city = place.getAddressLine(0);
         }catch (IOException e){
             e.printStackTrace();
