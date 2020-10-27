@@ -27,6 +27,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     GoogleMap map;
     Marker marker;
+    static final LatLng EXAMPLE = new LatLng(39.469473, -0.371751);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +42,15 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
         map.animateCamera(CameraUpdateFactory.zoomTo(13f));
+
+        Marker marker = map.addMarker(new MarkerOptions()
+                .position(EXAMPLE)
+                .draggable(true)
+        );
         getInfoWindow(marker);
         map.setInfoWindowAdapter(new UserInfoWindowAdapter(getLayoutInflater()));
         map.setOnInfoWindowClickListener(this);
+        map.moveCamera(CameraUpdateFactory.newLatLng(EXAMPLE));
     }
 
     public void getInfoWindow(Marker marker){
