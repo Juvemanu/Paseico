@@ -38,15 +38,23 @@ public class profileFragment extends Fragment {
     private DatabaseReference myActualUserRef;
     private  Boolean firstTimeCheckBoost = false;
 
+    private TextView textView;
+    private TextView nickText, userPoints, numberOfUserRoutes;
+
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         profileViewModel = new ViewModelProvider(this).get(profileViewModel.class);
 
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
+        //textView = root.findViewById(R.id.text_home);
+        nickText = root.findViewById(R.id.nickProfileText);
 
-        profileViewModel.getText().observe(getViewLifecycleOwner(), s -> textView.setText(s));
+
+
+        profileViewModel.getText().observe(getViewLifecycleOwner(), s -> nickText.setText("hkjasdhfkja"));
+        //profileViewModel.getText().observe(getViewLifecycleOwner(), s -> textView.setText("hkjasdhfkja"));
 
         super.onCreate(savedInstanceState);
 
