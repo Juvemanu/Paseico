@@ -39,7 +39,7 @@ public class profileFragment extends Fragment {
     private  Boolean firstTimeCheckBoost = false;
 
     private TextView textView;
-    private TextView nickText, userPoints, numberOfUserRoutes;
+    private TextView nickText, userPointsText, numberOfUserRoutes;
 
 
 
@@ -47,14 +47,46 @@ public class profileFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         profileViewModel = new ViewModelProvider(this).get(profileViewModel.class);
 
+
+
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
         //textView = root.findViewById(R.id.text_home);
         nickText = root.findViewById(R.id.nickProfileText);
+        userPointsText = root.findViewById(R.id.userPointsProfileText);
+        numberOfUserRoutes = root.findViewById(R.id.numberOfRoutesText);
+
+        FirebaseUser userAuth = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
+            //String name = userAuth.getEmail();
+            String uidUser = userAuth.getUid();
 
 
 
-        profileViewModel.getText().observe(getViewLifecycleOwner(), s -> nickText.setText("hkjasdhfkja"));
+            ValueEventListener eventListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String userName = snapshot.child(uidUser).child("username").getValue(String.class);
+                    int userPoints = snapshot.child(uidUser).child("points").getValue(Integer.class);
+                    profileViewModel.getText().observe(getViewLifecycleOwner(), s -> nickText.setText(userName));
+                    profileViewModel.getText().observe(getViewLifecycleOwner(), s -> numberOfUserRoutes.setText(Integer.toString(userPoints)));
+                    profileViewModel.getText().observe(getViewLifecycleOwner(), s -> userPointsText.setText(Integer.toString(userPoints)));
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            };
+            myUsersRef.addListenerForSingleValueEvent(eventListener);
+
+        }
+
+
+
         //profileViewModel.getText().observe(getViewLifecycleOwner(), s -> textView.setText("hkjasdhfkja"));
+
+
 
         super.onCreate(savedInstanceState);
 
