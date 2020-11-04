@@ -42,8 +42,8 @@ public class DashboardActivity extends AppCompatActivity {
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String userName = snapshot.child("UXb19yqyQSNvAdQiEAbK6PcYIlo2").child("username").getValue(String.class);
-                int userPoints = snapshot.child("UXb19yqyQSNvAdQiEAbK6PcYIlo2").child("points").getValue(Integer.class);
+                String userName = snapshot.child("tCei3dlG4HMhUAz3SoRdHTetq353").child("username").getValue(String.class);
+                int userPoints = snapshot.child("tCei3dlG4HMhUAz3SoRdHTetq353").child("points").getValue(Integer.class);
                 nickText.setText(userName);
                 userPointsText.setText(Integer.toString(userPoints));
             }

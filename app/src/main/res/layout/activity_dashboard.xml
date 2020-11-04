@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/geometrics_cut"
     tools:context=".DashboardActivity">
 
     <TextView
@@ -11,10 +12,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="400dp"
         android:layout_marginEnd="150dp"
-        android:layout_marginRight="150dp"
         android:layout_marginBottom="450dp"
         android:text="Pepe"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,22 +21,20 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.724" />
 
     <TextView
         android:id="@+id/PointDashboardText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
-        android:layout_marginLeft="150dp"
         android:layout_marginTop="350dp"
         android:layout_marginEnd="150dp"
-        android:layout_marginRight="150dp"
         android:layout_marginBottom="350dp"
         android:text="POINTS"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
@@ -47,10 +44,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
-        android:layout_marginLeft="150dp"
         android:layout_marginTop="400dp"
         android:layout_marginEnd="150dp"
-        android:layout_marginRight="150dp"
         android:layout_marginBottom="300dp"
         android:text="XXXXXX"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -95,5 +90,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="78dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="170dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="170dp"
+        android:layout_marginBottom="420dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/user_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
