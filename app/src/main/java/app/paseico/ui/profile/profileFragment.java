@@ -2,6 +2,7 @@ package app.paseico.ui.profile;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,9 @@ import androidx.lifecycle.ViewModelProvider;
 import app.paseico.R;
 import app.paseico.data.User;
 import app.paseico.login.LogInActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -22,6 +26,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -40,6 +48,7 @@ public class profileFragment extends Fragment {
 
     private TextView textView;
     private TextView nickText, userPointsText, numberOfUserRoutes;
+    int numberOfRoutes = 0;
 
 
 
@@ -57,11 +66,33 @@ public class profileFragment extends Fragment {
 
         FirebaseUser userAuth = FirebaseAuth.getInstance().getCurrentUser();
 
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        CollectionReference routesReference = database.collection("route");
+
+
         if (user != null) {
             //String name = userAuth.getEmail();
             String uidUser = userAuth.getUid();
 
 
+            routesReference.whereEqualTo("authorId", uidUser)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    numberOfRoutes++;
+                                    System.out.println (" numero de rutas para ti es:"+ numberOfRoutes);
+
+                                }
+                            } else {
+                                //Log.d(TAG, "Error getting documents: ", task.getException());
+                            }
+                        }
+
+
+                    });
 
             ValueEventListener eventListener = new ValueEventListener() {
                 @Override
@@ -69,7 +100,7 @@ public class profileFragment extends Fragment {
                     String userName = snapshot.child(uidUser).child("username").getValue(String.class);
                     int userPoints = snapshot.child(uidUser).child("points").getValue(Integer.class);
                     profileViewModel.getText().observe(getViewLifecycleOwner(), s -> nickText.setText(userName));
-                    profileViewModel.getText().observe(getViewLifecycleOwner(), s -> numberOfUserRoutes.setText(Integer.toString(userPoints)));
+                    profileViewModel.getText().observe(getViewLifecycleOwner(), s -> numberOfUserRoutes.setText(Integer.toString(numberOfRoutes)));
                     profileViewModel.getText().observe(getViewLifecycleOwner(), s -> userPointsText.setText(Integer.toString(userPoints)));
                 }
 
