@@ -1,11 +1,15 @@
 package app.paseico.mainMenu.userCreatedRoutes;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import app.paseico.R;
 import app.paseico.data.PointOfInterest;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -45,6 +49,10 @@ public class CreateNewRouteActivity extends AppCompatActivity implements OnMapRe
     protected int nextPosition = 0;
 
     private boolean isOrganization;
+
+    // This value has been copied from RouteRunnerBase. It should
+    // represent the code for the location request.
+    private static final int LOCATION_REQUEST_CODE = 23;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,16 +178,52 @@ public class CreateNewRouteActivity extends AppCompatActivity implements OnMapRe
 
         createNewRouteMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.create_route_style));
 
-        // TODO: Move camera to real user position.
-        LatLng fakeUserPosition = new LatLng(39.475, -0.375);
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(fakeUserPosition));
+        // Enables all the UI related to the user location and bearing.
+        createNewRouteMap.setMyLocationEnabled(true);
 
-        googleMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+        requestLocationPermission();
+
+        tryMoveCameraToUserPosition();
 
         registerOnMapClick();
         registerOnMarkerClickListener();
         registerOnGoogleMapsPoiClickListener();
         registerOnMapLongClick();
+    }
+
+    /**
+     * Try to move the camera to the user current position
+     * if the coarse location permission are already granted.
+     */
+    private void tryMoveCameraToUserPosition() {
+        if (isCoarseLocationPermissionAlreadyGranted()) {
+            moveCameraToUserPosition();
+        }
+    }
+
+    private void requestLocationPermission() {
+        if (!isCoarseLocationPermissionAlreadyGranted()) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                    LOCATION_REQUEST_CODE);
+        }
+    }
+
+    private boolean isCoarseLocationPermissionAlreadyGranted() {
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == LOCATION_REQUEST_CODE) {
+            if (didUserGrantCoarseLocationPermission(grantResults)) {
+                moveCameraToUserPosition();
+            }
+        }
+    }
+
+    private boolean didUserGrantCoarseLocationPermission(int[] grantResults) {
+        return grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED;
     }
 
     private void registerOnMapClick() {
