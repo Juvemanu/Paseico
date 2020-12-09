@@ -223,6 +223,24 @@ public class CreateNewRouteActivity extends AppCompatActivity implements OnMapRe
         return grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED;
     }
 
+    private void moveCameraToUserPosition() {
+        // Enables all the UI related to the user location and bearing.
+        createNewRouteMap.setMyLocationEnabled(true);
+
+        // The use of a deprecated method is due to convenience and ease of use.
+        // Also, a similar approach has been taken in other parts of this codebase.
+        createNewRouteMap.setOnMyLocationChangeListener(location -> {
+            if (location == null) {
+                return;
+            }
+
+            LatLng userCurrentLocation = new LatLng(location.getLatitude(), location.getLongitude());
+
+            createNewRouteMap.animateCamera(CameraUpdateFactory.newLatLngZoom(userCurrentLocation, 15));
+            //createNewRouteMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+        });
+    }
+
     private void registerOnMapClick() {
         createNewRouteMap.setOnMapClickListener(tapPoint -> tryDeleteUserNewCustomPoiInCreation());
     }
