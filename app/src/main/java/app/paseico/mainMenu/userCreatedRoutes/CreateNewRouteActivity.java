@@ -178,9 +178,6 @@ public class CreateNewRouteActivity extends AppCompatActivity implements OnMapRe
 
         createNewRouteMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.create_route_style));
 
-        // Enables all the UI related to the user location and bearing.
-        createNewRouteMap.setMyLocationEnabled(true);
-
         requestLocationPermission();
 
         tryMoveCameraToUserPosition();
