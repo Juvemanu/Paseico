@@ -395,6 +395,7 @@ public class ModifyRouteActivity extends AppCompatActivity implements OnMapReady
                     selectPointOfInterest(marker, false);
                 }
             }
+
             return true;
         });
     }
@@ -440,14 +441,14 @@ public class ModifyRouteActivity extends AppCompatActivity implements OnMapReady
     }
 
     private void tryFinalizeRouteCreation() {
-        if (pointsOfInterest.size()>=2) {
+        if (pointsOfInterest.size() >= 2) {
             if (currentRouter.getHasFreeRouteCreation()) {
                 currentRouter.setHasFreeRouteCreation(false);
                 showConfirmationDialog();
             } else {
                 showRouteCreationSummaryDialog();
             }
-        }else{
+        } else {
             Toast.makeText(ModifyRouteActivity.this, "Ruta debe tener 2 POIs mínimo", Toast.LENGTH_SHORT).show();
         }
     }
@@ -514,6 +515,7 @@ public class ModifyRouteActivity extends AppCompatActivity implements OnMapReady
     private void showConfirmationDialog() {
         String dialogMessage = getResources().getString(R.string.route_creation_confirmation_message);
         AlertDialog.Builder builder = setUpBuilder(dialogMessage);
+
         // In case the user close the dialog either by tapping outside of the dialog or by pressing any button,
         // it's considered dismissed.
         builder.setOnDismissListener(dialog -> finalizeRouteCreation());
@@ -538,8 +540,8 @@ public class ModifyRouteActivity extends AppCompatActivity implements OnMapReady
         String authorId = FirebaseService.getCurrentUser().getUid();
         int rewardPointsGranted = calculateRouteRewardPoints();
 
-        FirebaseService.updateRoute(retrievedRouteId, "rewardPoints", rewardPointsGranted);
-        FirebaseService.updateRoute(retrievedRouteId, "pointsOfInterest", pointsOfInterest);
+        FirebaseService.updateDatabaseRoute(retrievedRouteId, "rewardPoints", rewardPointsGranted);
+        FirebaseService.updateDatabaseRoute(retrievedRouteId, "pointsOfInterest", pointsOfInterest);
     }
 
     private int calculateRouteRewardPoints() {

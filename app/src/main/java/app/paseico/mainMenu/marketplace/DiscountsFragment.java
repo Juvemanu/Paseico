@@ -3,10 +3,6 @@ package app.paseico.mainMenu.marketplace;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +11,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,7 +27,6 @@ import com.google.firebase.database.ValueEventListener;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -37,7 +35,6 @@ import app.paseico.R;
 import app.paseico.data.Discount;
 import app.paseico.data.DiscountObj;
 import app.paseico.data.Router;
-import app.paseico.data.User;
 
 
 public class DiscountsFragment extends Fragment {
@@ -57,7 +54,6 @@ public class DiscountsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
 
         root = inflater.inflate(R.layout.fragment_discounts, container, false);
 
@@ -96,7 +92,6 @@ public class DiscountsFragment extends Fragment {
                 ArrayAdapter<DiscountObj> adapter = new ArrayAdapter<DiscountObj>(getActivity(), R.layout.cupon_item, listDiscounts);
                 discountsList.setAdapter(adapter);
 
-
             }
 
             @Override
@@ -106,8 +101,10 @@ public class DiscountsFragment extends Fragment {
         });
 
         discountsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
                 final DatabaseReference myPointsReference = myActualUserRef.child("points");
                 if (discounts.get(i).getPoints() <= currentRouter.getPoints()) {
                     int updatedPoints = currentRouter.getPoints() - discounts.get(i).getPoints();
@@ -119,7 +116,6 @@ public class DiscountsFragment extends Fragment {
                 }
             }
         });
-
 
         return root;
     }
@@ -146,7 +142,5 @@ public class DiscountsFragment extends Fragment {
         }
         return sb.toString();
     }
-
-
 }
 

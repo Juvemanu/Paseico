@@ -38,28 +38,41 @@ public class FirebaseService {
             String createdRouteID = documentReference.getId();
             updateRoute(createdRouteID, "id", createdRouteID);
             setGeoFireRoute(createdRouteID, route);
+
+            route.setId(createdRouteID);
         });
 
         System.out.println("Route " + route.getName() + " successfully added to Firebase.");
     }
 
-    public static void updateRoute(String routeId, String attribute, String newValue) {
-        updateRouteObject(routeId, attribute, newValue);
+    public static void deleteRoute(Route expectedRoute) {
+        DocumentReference reference = firebaseFirestore.collection("route").document(expectedRoute.getId());
+
+        reference.delete().addOnFailureListener(
+                (exception) -> System.err.println("An error has occurred while trying to delete the route: " +
+                        expectedRoute.getId() + System.lineSeparator() +
+                        exception.getMessage()
+                )
+        );
     }
 
-    public static void updateRoute(String routeId, String attribute, Double newValue) {
-        updateRouteObject(routeId, attribute, newValue);
+    public static void updateDatabaseRoute(String routeId, String attribute, String newValue) {
+        updateDatabaseRouteObject(routeId, attribute, newValue);
     }
 
-    public static void updateRoute(String routeId, String attribute, int newValue) {
-        updateRouteObject(routeId, attribute, newValue);
+    public static void updateDatabaseRoute(String routeId, String attribute, Double newValue) {
+        updateDatabaseRouteObject(routeId, attribute, newValue);
     }
 
-    public static void updateRoute(String routeId, String attribute, List<PointOfInterest> newValue) {
-        updateRouteObject(routeId, attribute, newValue);
+    public static void updateDatabaseRoute(String routeId, String attribute, int newValue) {
+        updateDatabaseRouteObject(routeId, attribute, newValue);
     }
 
-    private static void updateRouteObject(String routeId, String attribute, Object newValue) {
+    public static void updateDatabaseRoute(String routeId, String attribute, List<PointOfInterest> newValue) {
+        updateDatabaseRouteObject(routeId, attribute, newValue);
+    }
+
+    private static void updateDatabaseRouteObject(String routeId, String attribute, Object newValue) {
         DocumentReference reference = firebaseFirestore.collection("route").document(routeId);
 
         reference
@@ -70,7 +83,7 @@ public class FirebaseService {
         System.out.println("Updated " + attribute + " as " + newValue.toString());
     }
 
-    private static void setGeoFireRoute(String id, Route route){
+    private static void setGeoFireRoute(String id, Route route) {
         CollectionReference ref = FirebaseFirestore.getInstance().collection("geofire");
         List<PointOfInterest> pois = route.getPointsOfInterest();
         PointOfInterest first = pois.get(0);
