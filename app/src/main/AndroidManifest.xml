@@ -41,7 +41,9 @@
         <activity android:name=".RouteFinishedActivity" />
         <activity android:name=".mainMenu.searchUsers.FollowersActivity" />
         <activity android:name=".RouteInformationActivity" />
-        <activity android:name=".login.RegisterActivity" />
+        <activity android:name=".login.RegisterActivity" >
+
+        </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".login.LogInActivity" />
         <activity android:name=".login.RegisterOrganizationActivity" />
