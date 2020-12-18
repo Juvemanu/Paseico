@@ -29,11 +29,6 @@ public class NotMyProfileFragment extends Fragment {
     User foreignUser;
     String searchedUser;
     Button buttonLogOut;
-    private Boolean firstTimeCheckBoost = false;
-    private User user = new User();
-    private String usernameFirebase;
-    private UserAdapter userAdapter;
-    private List<User> mUsers;
 
 
     @Override
@@ -58,7 +53,6 @@ public class NotMyProfileFragment extends Fragment {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         User user = dataSnapshot.getValue(User.class);
-                                        usernameFirebase = user.getUsername();
                                         userInfo();
                                         getFollowers();
                                         checkFollow();

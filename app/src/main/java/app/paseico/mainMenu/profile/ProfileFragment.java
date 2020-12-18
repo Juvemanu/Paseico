@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 import app.paseico.mainMenu.searchUsers.FollowersActivity;
@@ -16,7 +15,6 @@ import app.paseico.R;
 import app.paseico.data.Router;
 import app.paseico.data.User;
 import app.paseico.login.LogInActivity;
-import app.paseico.mainMenu.searchUsers.UserAdapter;
 import app.paseico.service.FirebaseService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -40,9 +38,6 @@ public class ProfileFragment extends Fragment {
     ImageButton userRoutes;
     private Boolean firstTimeCheckBoost = false;
     private Router user = new Router();
-    private String usernameFirebase;
-    private UserAdapter userAdapter;
-    private List<User> mUsers;
     private int numberOfRoutes = 0;
 
     @Override
@@ -80,10 +75,6 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
-                //mUsers.add(user);
-                //mUsers.clear();
-                usernameFirebase = user.getUsername();
-                //userAdapter.notifyDataSetChanged();
                 setUserInfoOnGetCurrentUserReady();
                 getFollowers();
                 //if (profileid.equals(usernameFirebase)) { //HERE

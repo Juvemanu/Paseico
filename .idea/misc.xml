@@ -15,6 +15,9 @@
   <component name="ProjectType">
     <option name="id" value="Android" />
   </component>
+  <component name="QAPlugAnalysisUIOptions">
+    <option name="GROUP_BY_SEVERITY" value="true" />
+  </component>
   <component name="SuppressionsComponent">
     <option name="suppComments" value="[]" />
   </component>

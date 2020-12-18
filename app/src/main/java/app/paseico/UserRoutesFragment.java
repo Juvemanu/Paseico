@@ -31,7 +31,7 @@ public class UserRoutesFragment extends Fragment {
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
-    private int mColumnCount = 1;
+    private int mColumnCount;
 
     private DatabaseReference myUsersRef = FirebaseDatabase.getInstance().getReference("users"); //Node users reference
     private DatabaseReference myActualUserRef;
@@ -81,8 +81,6 @@ public class UserRoutesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_routes_list, container, false);
         ListView userRoutesList = view.findViewById(R.id.UserRoutesList);
-
-        myActualUserRef = myUsersRef.child(fireBaseUser.getUid());
 
         routesReference.whereEqualTo("authorId", fireBaseUser.getUid())
                 .get()

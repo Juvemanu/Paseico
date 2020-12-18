@@ -79,7 +79,7 @@ public class RouteInformationActivity extends AppCompatActivity {
         Route route = (Route) getIntent().getExtras().get("route");
 
         String name = route.getName();
-        String rewardsPoints = ((Integer) route.getRewardPoints()).toString();
+        String rewardsPoints = route.getRewardPoints() + "";
         int kms = (int) route.getLength() / 1000;
         int meters = (int) route.getLength() % 1000;
         String length = kms + " km y " + meters + " metros";
