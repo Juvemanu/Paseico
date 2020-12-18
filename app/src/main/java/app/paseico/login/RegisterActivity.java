@@ -155,7 +155,7 @@ public class RegisterActivity extends AppCompatActivity {
                                             Intent intent = new Intent(RegisterActivity.this, LogInActivity.class);
                                             startActivity(intent);
                                             finish();
-                                        } catch (Exception e) {
+                                        } catch (Exception e) { e.printStackTrace();
                                         }
                                     }
                                 }, 2000);

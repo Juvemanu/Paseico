@@ -17,22 +17,21 @@ import java.util.ArrayList;
 
 public class RouteRunnerOrderedActivity extends RouteRunnerBase {
 
-    protected ArrayList<String> pointsOfInterestNames = (ArrayList<String>) super.pointsOfInterestNames;
-    public ArrayList<LatLng> locations = (ArrayList<LatLng>) super.locations;
-    public ArrayList<Boolean> isCompleted = (ArrayList<Boolean>) super.isCompleted;
-    Route actualRoute;
+    protected ArrayList<String> myPointsOfInterestNames = (ArrayList<String>) super.pointsOfInterestNames;
+    public ArrayList<LatLng> myLocations = (ArrayList<LatLng>) super.locations;
+    public ArrayList<Boolean> myIsCompleted = (ArrayList<Boolean>) super.isCompleted;
+
     LatLng currentDest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route_runner_ordered);
-        Intent intent = getIntent();
-        Bundle b = intent.getExtras();
+
+
         //request location permission.
         requestPermision();
         InitiateAllVars();
-        this.actualRoute = super.actualRoute;
         routeDisplay = findViewById(R.id.TextNextRoute);
 
         routeTitle.setText(nombredeRuta);
@@ -43,21 +42,21 @@ public class RouteRunnerOrderedActivity extends RouteRunnerBase {
     public void placePOIsFromRoute() {
         routeRunnerMap.clear();
 
-        for (int i = 0; i < pointsOfInterestNames.size(); i++) {
-            if (isCompleted.get(i)) {
-                routeRunnerMap.addMarker(new MarkerOptions().position(locations.get(i)).title(pointsOfInterestNames.get(i)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+        for (int i = 0; i < myPointsOfInterestNames.size(); i++) {
+            if (myIsCompleted.get(i)) {
+                routeRunnerMap.addMarker(new MarkerOptions().position(myLocations.get(i)).title(myPointsOfInterestNames.get(i)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
             } else {
                 if (i == actualPOI) {
-                    routeRunnerMap.addMarker(new MarkerOptions().position(locations.get(i)).title(pointsOfInterestNames.get(i)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                    routeRunnerMap.addMarker(new MarkerOptions().position(myLocations.get(i)).title(myPointsOfInterestNames.get(i)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
                 } else {
-                    routeRunnerMap.addMarker(new MarkerOptions().position(locations.get(i)).title(pointsOfInterestNames.get(i)));
+                    routeRunnerMap.addMarker(new MarkerOptions().position(myLocations.get(i)).title(myPointsOfInterestNames.get(i)));
                 }
             }
         }
 
         if (poisLeft == 0) {
             for (int j = 0; j < locations.size(); j++) {
-                isCompleted.set(j, false);
+                myIsCompleted.set(j, false);
                 poisLeft++;
             }
             Intent intent = new Intent(RouteRunnerOrderedActivity.this, RouteFinishedActivity.class);
@@ -72,7 +71,7 @@ public class RouteRunnerOrderedActivity extends RouteRunnerBase {
 
         if (poisLeft > 0) {
             start = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
-            LatLng destination = new LatLng(locations.get(i).latitude, locations.get(i).longitude);
+            LatLng destination = new LatLng(myLocations.get(i).latitude, myLocations.get(i).longitude);
             currentDest = destination;
             routeDisplay.setText("Próximo destino: \n" + pointsOfInterestNames.get(i));
             currentDestination = new Location(destination.toString());
@@ -109,7 +108,7 @@ public class RouteRunnerOrderedActivity extends RouteRunnerBase {
                 if (myLocation.distanceTo(currentDestination) < 50) {
                     System.out.println("HAS COMPLETADO EL POI");
                     currentDestination = null;
-                    isCompleted.set(actualPOI, true);
+                    myIsCompleted.set(actualPOI, true);
                     actualPOI++;
                     poisLeft--;
                     setNextOrderedPoint(actualPOI);

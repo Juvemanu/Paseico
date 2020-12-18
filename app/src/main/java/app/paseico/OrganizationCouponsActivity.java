@@ -142,7 +142,7 @@ public class OrganizationCouponsActivity extends AppCompatActivity {
                     selected = false;
                     Toast.makeText(OrganizationCouponsActivity.this, "Cupon eliminado! ",
                             Toast.LENGTH_SHORT).show();
-                } catch (Exception e) {
+                } catch (Exception e) { e.printStackTrace();
                 }
             }
         }, 1000);

@@ -25,9 +25,9 @@ import java.util.List;
 
 public class RouteRunnerNotOrderedActivity extends RouteRunnerBase {
 
-    protected ArrayList<String> pointsOfInterestNames = new ArrayList<String>();
-    public ArrayList<LatLng> locations = new ArrayList<LatLng>();
-    public ArrayList<Boolean> isCompleted = new ArrayList<Boolean>();
+    protected ArrayList<String> myPointsOfInterestNames = new ArrayList<String>();
+    public ArrayList<LatLng> myLocations = new ArrayList<LatLng>();
+    public ArrayList<Boolean> myIsCompleted = new ArrayList<Boolean>();
 
     // This is involved in a hacky solution for making the automatic camera
     // centering in the User current location just once.
@@ -73,8 +73,8 @@ public class RouteRunnerNotOrderedActivity extends RouteRunnerBase {
         listView.setAdapter(arrayAdapter);
         listView.setBackgroundResource(R.drawable.layout_bgt);
         listView.setOnItemClickListener((adapterView, view, i, l) -> {
-            if (!isCompleted.get(i)) {
-                LatLng destination = new LatLng(locations.get(i).latitude, locations.get(i).longitude);
+            if (!myIsCompleted.get(i)) {
+                LatLng destination = new LatLng(myLocations.get(i).latitude, myLocations.get(i).longitude);
 
                 start = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
                 //start route finding
@@ -101,10 +101,10 @@ public class RouteRunnerNotOrderedActivity extends RouteRunnerBase {
         routeRunnerMap.clear();
 
         for (int i = 0; i < pointsOfInterestNames.size(); i++) {
-            if (isCompleted.get(i)) {
-                routeRunnerMap.addMarker(new MarkerOptions().position(locations.get(i)).title(pointsOfInterestNames.get(i)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+            if (myIsCompleted.get(i)) {
+                routeRunnerMap.addMarker(new MarkerOptions().position(myLocations.get(i)).title(myPointsOfInterestNames.get(i)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
             } else {
-                routeRunnerMap.addMarker(new MarkerOptions().position(locations.get(i)).title(pointsOfInterestNames.get(i)));
+                routeRunnerMap.addMarker(new MarkerOptions().position(myLocations.get(i)).title(myPointsOfInterestNames.get(i)));
             }
         }
 
@@ -186,13 +186,13 @@ public class RouteRunnerNotOrderedActivity extends RouteRunnerBase {
             View rowview = View.inflate(context, R.layout.activity_runner_textview, null);
             TextView nom = rowview.findViewById(R.id.textPOI);
 
-            if (isCompleted.get(i)) {
+            if (myIsCompleted.get(i)) {
                 nom.setBackgroundColor(Color.GREEN);
             }
             if (actualPOI == i) {
                 nom.setText(Html.fromHtml("<b>" + pointsOfInterestNames.get(i) + "</b>"));
             } else {
-                nom.setText(pointsOfInterestNames.get(i));
+                nom.setText(myPointsOfInterestNames.get(i));
             }
 
             return rowview;

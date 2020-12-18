@@ -122,7 +122,7 @@ public class RegisterOrganizationActivity extends AppCompatActivity {
                                                 Intent intent = new Intent(RegisterOrganizationActivity.this, LogInActivity.class);
                                                 startActivity(intent);
                                                 finish();
-                                            } catch(Exception e) {}
+                                            } catch(Exception e) { e.printStackTrace();}
                                         }
                                     },
                         2000);
