@@ -179,7 +179,7 @@ public class CreateNewRouteActivity extends AppCompatActivity implements OnMapRe
     }
 
     private void moveUpSelectedPoiInList() {
-        if (selectedPOIinList != "" && positionOfPOIinList != 0) {
+        if (!selectedPOIinList.equals("") && positionOfPOIinList != 0) {
             nextPosition = positionOfPOIinList - 1;
             moveSelectedPoiInList();
         } else {
@@ -189,7 +189,7 @@ public class CreateNewRouteActivity extends AppCompatActivity implements OnMapRe
     }
 
     private void moveDownSelectedPoiInList() {
-        if (selectedPOIinList != "" && positionOfPOIinList != markedPOIs.size() - 1) {
+        if (!selectedPOIinList.equals("") && positionOfPOIinList != markedPOIs.size() - 1) {
             nextPosition = positionOfPOIinList + 1;
             moveSelectedPoiInList();
         } else {

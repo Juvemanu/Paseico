@@ -229,7 +229,6 @@ public class marketplaceFragment extends Fragment {
     }
 
     private void successAnimation() {
-        int red = Color.parseColor("#e33630");
         int green = Color.parseColor("#32d959");
         int background = getResources().getColor(R.color.background);
         root.setBackgroundColor(green);

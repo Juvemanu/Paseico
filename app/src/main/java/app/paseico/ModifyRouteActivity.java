@@ -537,8 +537,7 @@ public class ModifyRouteActivity extends AppCompatActivity implements OnMapReady
     }
 
     private void modifyRoute() {
-        TextInputEditText textInputEditText = findViewById(R.id.route_name_textInputEditText);
-        String authorId = FirebaseService.getCurrentUser().getUid();
+
         int rewardPointsGranted = calculateRouteRewardPoints();
 
         FirebaseService.updateRoute(retrievedRouteId, "rewardPoints", rewardPointsGranted);

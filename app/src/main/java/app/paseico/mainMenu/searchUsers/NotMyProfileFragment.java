@@ -32,8 +32,8 @@ public class NotMyProfileFragment extends Fragment {
     private Boolean firstTimeCheckBoost = false;
     private User user = new User();
     private String usernameFirebase;
-    private UserAdapter userAdapter;
-    private List<User> mUsers;
+
+
 
 
     @Override

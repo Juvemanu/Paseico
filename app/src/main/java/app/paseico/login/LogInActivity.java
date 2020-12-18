@@ -197,14 +197,15 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     private void goToMainScreen() {
-        Intent intent = new Intent();
         if (!isRouterTabSelected()) {
-            intent = new Intent(LogInActivity.this, MainMenuActivity.class);
+            Intent   intent = new Intent(LogInActivity.this, MainMenuActivity.class);
+            startActivity(intent);
         }
         else {
-            intent = new Intent(LogInActivity.this, MainMenuOrganizationActivity.class);
+            Intent  intent = new Intent(LogInActivity.this, MainMenuOrganizationActivity.class);
+            startActivity(intent);
         }
-        startActivity(intent);
+
         finish();
     }
 

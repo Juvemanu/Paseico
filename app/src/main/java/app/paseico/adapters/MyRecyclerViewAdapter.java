@@ -76,7 +76,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        View myView;
         TextView myNames;
         TextView myEstimatedTimes;
         TextView myMinutes;

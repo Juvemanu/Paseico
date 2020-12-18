@@ -141,8 +141,7 @@ public abstract class RouteRunnerBase<Polyline> extends FragmentActivity impleme
     @Override
     public void onRoutingSuccess(ArrayList<Route> route, int shortestRouteIndex) {
 
-        CameraUpdate center = CameraUpdateFactory.newLatLng(start);
-        CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
+
 
         if (polylines != null) {
             polylines.clear();
