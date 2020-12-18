@@ -58,7 +58,6 @@ public class UserCreatedRoutesFragment extends Fragment implements MyRecyclerVie
     private List<String> orgNames = new ArrayList<>();
     private List<Integer> orgRoutesIcons = new ArrayList<>();
 
-    private List<String> nearKeys = new ArrayList<String>();
     private List<Route> nearRoutes = new ArrayList<Route>();
 
     private List<String> nearRoutesNames = new ArrayList<>();
@@ -68,7 +67,6 @@ public class UserCreatedRoutesFragment extends Fragment implements MyRecyclerVie
     private List<String> nearRoutesMeters = new ArrayList<>();
     private List<String> nearRoutesRewardPoints = new ArrayList<>();
     private List<String> nearRoutesAreOrdered = new ArrayList<>();
-    private List<String> nearNames = new ArrayList<>();
     private List<Integer> nearRoutesIcons = new ArrayList<>();
 
     private Location myLocation = null;
