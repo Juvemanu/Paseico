@@ -21,7 +21,7 @@ import com.google.firebase.database.*;
 import java.util.List;
 
 public class NotMyProfileFragment extends Fragment {
-    ImageView image_profile;
+   // ImageView image_profile;
     TextView textView_followersNumber, textView_followersText, textView_followingText, textView_followingNumber, textView_fullname, textView_username;
     FirebaseUser firebaseUser;
     String profileid;
@@ -52,7 +52,6 @@ public class NotMyProfileFragment extends Fragment {
                                 FirebaseDatabase.getInstance().getReference("users").child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        User user = dataSnapshot.getValue(User.class);
                                         userInfo();
                                         getFollowers();
                                         checkFollow();
@@ -81,7 +80,7 @@ public class NotMyProfileFragment extends Fragment {
             }
         });
 
-        image_profile = view.findViewById(R.id.image_profile);
+        //image_profile = view.findViewById(R.id.image_profile);
         textView_followersNumber = view.findViewById(R.id.textView_followersNumber);
         textView_followingNumber = view.findViewById(R.id.textView_followingNumber);
         textView_username = view.findViewById(R.id.username);

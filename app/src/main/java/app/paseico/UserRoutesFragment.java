@@ -31,10 +31,10 @@ public class UserRoutesFragment extends Fragment {
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
-    private int mColumnCount;
+   // private int mColumnCount;
 
-    private DatabaseReference myUsersRef = FirebaseDatabase.getInstance().getReference("users"); //Node users reference
-    private DatabaseReference myActualUserRef;
+   // private DatabaseReference myUsersRef = FirebaseDatabase.getInstance().getReference("users"); //Node users reference
+
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser fireBaseUser = firebaseAuth.getCurrentUser();
     FirebaseFirestore database = FirebaseFirestore.getInstance();
@@ -72,7 +72,7 @@ public class UserRoutesFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            //mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
     }
 

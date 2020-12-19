@@ -17,7 +17,7 @@ import app.paseico.R;
 
 public class FilteredListAdapter extends ArrayAdapter<String> {
 
-    Context context;
+   // Context context;
     List<String> names;
     List<String> estimatedHours;
     List<String> estimatedMinutes;
@@ -31,7 +31,7 @@ public class FilteredListAdapter extends ArrayAdapter<String> {
     public FilteredListAdapter(Context context, List<String> names, List<String> estimatedHours, List<String> estimatedMinutes, List<String> kms, List<String> meters, List<String> points, List<Integer> icons, List<String> areOrdered) {
         super(context, R.layout.item_route_search, R.id.routeName, names);
 
-        this.context = context;
+        //this.context = context;
         this.names = names;
         this.estimatedHours = estimatedHours;
         this.estimatedMinutes = estimatedMinutes;

@@ -30,14 +30,13 @@ import java.util.Date;
 import java.util.List;
 
 public class ProfileFragment extends Fragment {
-    ImageView image_profile;
+    //ImageView image_profile;
     TextView followers, textView_followers, following, textView_following, fullnameLabel, usernameLabel, userPointsLabel, numberOfUserRoutes;
     FirebaseUser firebaseUser;
     User actualUser;
     Button buttonLogOut;
     ImageButton userRoutes;
-    private Boolean firstTimeCheckBoost = false;
-    private Router user = new Router();
+
     private int numberOfRoutes = 0;
 
     @Override
@@ -50,7 +49,7 @@ public class ProfileFragment extends Fragment {
         FirebaseDatabase.getInstance().getReference("users")
                 .child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 actualUser = dataSnapshot.getValue(User.class);
             }
 
@@ -59,7 +58,7 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        image_profile = view.findViewById(R.id.image_profile);
+       // image_profile = view.findViewById(R.id.image_profile);
         followers = view.findViewById(R.id.textView_followersNumber);
         following = view.findViewById(R.id.textView_followingNumber);
         usernameLabel = view.findViewById(R.id.username);
@@ -74,7 +73,7 @@ public class ProfileFragment extends Fragment {
         FirebaseDatabase.getInstance().getReference("users").child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
+
                 setUserInfoOnGetCurrentUserReady();
                 getFollowers();
                 //if (profileid.equals(usernameFirebase)) { //HERE
