@@ -2,7 +2,7 @@ package app.paseico;
 
 public class CategoryManager {
 
-    public static int ConvertCategoryToIntDrawable(String category) {
+    public static int convertCategoryToIntDrawable(String category) {
         int iconIndex = 0;
         //This is to test the method while there is
         // no category defined in create new route

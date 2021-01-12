@@ -57,7 +57,7 @@ public class FilteredListAdapter extends ArrayAdapter<String> {
         TextView orderedRoute = row.findViewById(R.id.textView_orderedRouteResult);
 
 
-        ImageView ListViewImage = (ImageView) row.findViewById(R.id.imageViewIcon);
+        ImageView listViewImage = (ImageView) row.findViewById(R.id.imageViewIcon);
 
         myNames.setText(names.get(position));
         myEstimatedTimes.setText(estimatedHours.get(position));
@@ -75,7 +75,7 @@ public class FilteredListAdapter extends ArrayAdapter<String> {
 
         orderedRoute.setText(isOrdered);
 
-        ListViewImage.setImageResource(icons.get(position));
+        listViewImage.setImageResource(icons.get(position));
 
         return row;
     }

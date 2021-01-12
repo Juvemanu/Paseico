@@ -39,7 +39,7 @@ public class IntroduceNewRouteDataActivity extends AppCompatActivity {
 
     private List<PointOfInterest> selectedPointsOfInterest = new ArrayList<>();
 
-    final double ROUTE_TOTAL_COST_MULTIPLIER_TO_GET_REWARD_POINTS = 0.5;
+    private static final double ROUTE_TOTAL_COST_MULTIPLIER_TO_GET_REWARD_POINTS = 0.5;
 
     private boolean isOrganization;
     @Override

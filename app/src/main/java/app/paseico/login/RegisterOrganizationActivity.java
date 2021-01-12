@@ -21,11 +21,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
 
 public class RegisterOrganizationActivity extends AppCompatActivity {
-    private EditText etName,
-            etPass,
-            etPassConf,
-            etNif,
-            etMail;
+    private EditText etName;
+    private EditText etPass;
+    private EditText etPassConf;
+    private EditText etNif;
+    private EditText etMail;
     private Button btnRegister;
     private FirebaseAuth mAuth;
     String name = null;

@@ -29,7 +29,12 @@ import com.google.firebase.database.ValueEventListener;
 import app.paseico.data.UserDao;
 
 public class RegisterActivity extends AppCompatActivity {
-    private EditText etName, etSurname, etUsername, etEmail, etPassword, etPasswordConf;
+    private EditText etName;
+    private EditText etSurname;
+    private EditText etUsername;
+    private EditText etEmail;
+    private EditText etPassword;
+    private EditText etPasswordConf;
     private Button btnRegister;
     private FirebaseAuth mAuth;
     String name = null;

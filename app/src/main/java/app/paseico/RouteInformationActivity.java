@@ -18,14 +18,14 @@ import java.util.ArrayList;
 
 public class RouteInformationActivity extends AppCompatActivity {
 
-    private TextView textView_name;
-    private TextView textView_theme;
-    private TextView textView_rewardsPoints;
-    private TextView textView_length;
-    private TextView textView_estimatedTime;
-    private TextView textView_ordered;
+    private TextView textViewName;
+    private TextView textViewTheme;
+    private TextView textViewRewardsPoints;
+    private TextView textViewLength;
+    private TextView textViewEstimatedTime;
+    private TextView textViewOrdered;
     private ImageView themeIcon;
-    private ListView listView_poiList;
+    private ListView listViewPoiList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,13 +57,13 @@ public class RouteInformationActivity extends AppCompatActivity {
 
     @NotNull
     protected Route setFilteredInformation() {
-        textView_name = findViewById(R.id.textView_routeInfo_nameOfRoute);
-        textView_theme = findViewById(R.id.textView_routeInfo_theme);
-        textView_rewardsPoints = findViewById(R.id.textView_routeInfo_rewardPoints);
-        textView_length = findViewById(R.id.textView_routeInfo_length);
-        textView_estimatedTime = findViewById(R.id.textView_routeInfo_estimatedTime);
-        listView_poiList = findViewById(R.id.listView_routeInfo_poiList);
-        textView_ordered = findViewById(R.id.textView_routeInfo_ordered);
+        textViewName = findViewById(R.id.textView_routeInfo_nameOfRoute);
+        textViewTheme = findViewById(R.id.textView_routeInfo_theme);
+        textViewRewardsPoints = findViewById(R.id.textView_routeInfo_rewardPoints);
+        textViewLength = findViewById(R.id.textView_routeInfo_length);
+        textViewEstimatedTime = findViewById(R.id.textView_routeInfo_estimatedTime);
+        listViewPoiList = findViewById(R.id.listView_routeInfo_poiList);
+        textViewOrdered = findViewById(R.id.textView_routeInfo_ordered);
 
         themeIcon = (ImageView) findViewById(R.id.imageViewIconRouteInformation);
 
@@ -81,19 +81,19 @@ public class RouteInformationActivity extends AppCompatActivity {
         ArrayList<PointOfInterest> pois = (ArrayList) route.getPointsOfInterest();
         String theme = (route.getTheme() == null) ? "Sin temática" : route.getTheme();
 
-        int iconIdex = CategoryManager.ConvertCategoryToIntDrawable(theme);
+        int iconIdex = CategoryManager.convertCategoryToIntDrawable(theme);
 
 
-        textView_name.setText(name);
-        textView_theme.setText(theme);
-        textView_rewardsPoints.setText(rewardsPoints);
-        textView_length.setText(length);
-        textView_estimatedTime.setText(estimatedTime);
+        textViewName.setText(name);
+        textViewTheme.setText(theme);
+        textViewRewardsPoints.setText(rewardsPoints);
+        textViewLength.setText(length);
+        textViewEstimatedTime.setText(estimatedTime);
 
         if (route.isOrdered() == 1) {
-            textView_ordered.setText(R.string.yes);
+            textViewOrdered.setText(R.string.yes);
         } else {
-            textView_ordered.setText(R.string.no);
+            textViewOrdered.setText(R.string.no);
         }
 
         themeIcon.setImageResource(iconIdex);
@@ -104,9 +104,9 @@ public class RouteInformationActivity extends AppCompatActivity {
         }
 
         ArrayAdapter<String> pointsOfInterestNamesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, pointsOfInterestNames);
-        listView_poiList.setAdapter(pointsOfInterestNamesAdapter);
+        listViewPoiList.setAdapter(pointsOfInterestNamesAdapter);
 
-        listView_poiList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listViewPoiList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 PointOfInterest selectedPoi = pois.get(position);

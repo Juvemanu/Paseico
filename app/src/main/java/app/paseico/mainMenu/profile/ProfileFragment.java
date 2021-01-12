@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 import app.paseico.mainMenu.searchUsers.FollowersActivity;
@@ -32,8 +31,15 @@ import java.util.Date;
 import java.util.List;
 
 public class ProfileFragment extends Fragment {
-    ImageView image_profile;
-    TextView followers, textView_followers, following, textView_following, fullnameLabel, usernameLabel, userPointsLabel, numberOfUserRoutes;
+    ImageView imageProfile;
+    TextView followers;
+    TextView textViewFollowers;
+    TextView following;
+    TextView textViewFollowing;
+    TextView fullnameLabel;
+    TextView usernameLabel;
+    TextView userPointsLabel;
+    TextView numberOfUserRoutes;
     FirebaseUser firebaseUser;
     User actualUser;
     Button buttonLogOut;
@@ -64,14 +70,14 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        image_profile = view.findViewById(R.id.image_profile);
+        imageProfile = view.findViewById(R.id.image_profile);
         followers = view.findViewById(R.id.textView_followersNumber);
         following = view.findViewById(R.id.textView_followingNumber);
         usernameLabel = view.findViewById(R.id.username);
         fullnameLabel = view.findViewById(R.id.fullname);
         buttonLogOut = view.findViewById(R.id.buttonLogOut);
-        textView_followers = view.findViewById(R.id.textView_FollowersText);
-        textView_following = view.findViewById(R.id.textView_FollowingText);
+        textViewFollowers = view.findViewById(R.id.textView_FollowersText);
+        textViewFollowing = view.findViewById(R.id.textView_FollowingText);
         userPointsLabel = view.findViewById(R.id.userPointsProfileText);
         numberOfUserRoutes = view.findViewById(R.id.numberOfRoutesText);
         userRoutes = view.findViewById(R.id.btn_my_routes);
@@ -105,7 +111,7 @@ public class ProfileFragment extends Fragment {
             startActivity(intent);
         });
 
-        textView_followers.setOnClickListener(followersTextViewView -> {
+        textViewFollowers.setOnClickListener(followersTextViewView -> {
             Intent intent = new Intent(getContext(), FollowersActivity.class);
             intent.putExtra("id", actualUser.getUsername());
             intent.putExtra("title", "followers");
@@ -119,7 +125,7 @@ public class ProfileFragment extends Fragment {
             startActivity(intent);
         });
 
-        textView_following.setOnClickListener(followingTextViewView -> {
+        textViewFollowing.setOnClickListener(followingTextViewView -> {
             Intent intent = new Intent(getContext(), FollowersActivity.class);
             intent.putExtra("id", actualUser.getUsername());
             intent.putExtra("title", "following");

@@ -28,7 +28,7 @@ public class SearchUserFragment extends Fragment {
     private List<User> mUsers;
     FirebaseUser firebaseUser;
     User actualUser;
-    EditText search_bar;
+    EditText searchBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class SearchUserFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        search_bar = view.findViewById(R.id.search_bar);
+        searchBar = view.findViewById(R.id.search_bar);
 
         mUsers = new ArrayList<>();
         userAdapter = new UserAdapter(getContext(), mUsers, SearchUserFragment.this);
@@ -57,7 +57,7 @@ public class SearchUserFragment extends Fragment {
             }
         });
 
-        search_bar.addTextChangedListener(new TextWatcher() {
+        searchBar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -106,7 +106,7 @@ public class SearchUserFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                if (search_bar.getText().toString().equals("")) {
+                if (searchBar.getText().toString().equals("")) {
                     mUsers.clear();
                     for (DataSnapshot snapshot : datasnapshot.getChildren()) {
                         User user = snapshot.getValue(User.class);

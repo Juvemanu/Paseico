@@ -67,7 +67,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
         holder.orderedRoute.setText(isOrdered);
 
-        holder.ListViewImage.setImageResource(icons.get(position));
+        holder.listViewImage.setImageResource(icons.get(position));
     }
 
     @Override
@@ -85,7 +85,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         TextView myPoints;
         TextView orderedRoute;
         TextView organizationName;
-        ImageView ListViewImage;
+        ImageView listViewImage;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -97,7 +97,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
              myPoints = itemView.findViewById(R.id.routeReward);
              orderedRoute = itemView.findViewById(R.id.textView_orderedRouteResult);
              organizationName = itemView.findViewById(R.id.organizationNameText);
-             ListViewImage = (ImageView) itemView.findViewById(R.id.imageViewIcon);
+             listViewImage = (ImageView) itemView.findViewById(R.id.imageViewIcon);
              itemView.setOnClickListener(this);
         }
 

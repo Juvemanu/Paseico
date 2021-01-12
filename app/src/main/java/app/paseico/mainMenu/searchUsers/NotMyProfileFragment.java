@@ -21,8 +21,13 @@ import com.google.firebase.database.*;
 import java.util.List;
 
 public class NotMyProfileFragment extends Fragment {
-    ImageView image_profile;
-    TextView textView_followersNumber, textView_followersText, textView_followingText, textView_followingNumber, textView_fullname, textView_username;
+    ImageView imageProfile;
+    TextView textViewFollowersNumber;
+    TextView textViewFollowersText;
+    TextView textViewFollowingText;
+    TextView textViewFollowingNumber;
+    TextView textViewFullname;
+    TextView textViewUsername;
     FirebaseUser firebaseUser;
     String profileid;
     User actualUser;
@@ -87,14 +92,14 @@ public class NotMyProfileFragment extends Fragment {
             }
         });
 
-        image_profile = view.findViewById(R.id.image_profile);
-        textView_followersNumber = view.findViewById(R.id.textView_followersNumber);
-        textView_followingNumber = view.findViewById(R.id.textView_followingNumber);
-        textView_username = view.findViewById(R.id.username);
-        textView_fullname = view.findViewById(R.id.fullname);
+        imageProfile = view.findViewById(R.id.image_profile);
+        textViewFollowersNumber = view.findViewById(R.id.textView_followersNumber);
+        textViewFollowingNumber = view.findViewById(R.id.textView_followingNumber);
+        textViewUsername = view.findViewById(R.id.username);
+        textViewFullname = view.findViewById(R.id.fullname);
         buttonLogOut = view.findViewById(R.id.buttonLogOut);
-        textView_followersText = view.findViewById(R.id.textView_FollowersText);
-        textView_followingText = view.findViewById(R.id.textView_FollowingText);
+        textViewFollowersText = view.findViewById(R.id.textView_FollowersText);
+        textViewFollowingText = view.findViewById(R.id.textView_FollowingText);
 
 
         buttonLogOut.setOnClickListener(v -> {
@@ -129,8 +134,8 @@ public class NotMyProfileFragment extends Fragment {
                 }
                 User user = snapshot.getValue(User.class);
                 foreignUser = user;
-                textView_username.setText(user.getUsername());
-                textView_fullname.setText(user.getName());
+                textViewUsername.setText(user.getUsername());
+                textViewFullname.setText(user.getName());
                 activateFollowListeners();
             }
 
@@ -166,7 +171,7 @@ public class NotMyProfileFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                textView_followersNumber.setText("" + snapshot.getChildrenCount());
+                textViewFollowersNumber.setText("" + snapshot.getChildrenCount());
             }
 
             @Override
@@ -179,7 +184,7 @@ public class NotMyProfileFragment extends Fragment {
         reference1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                textView_followingNumber.setText("" + snapshot.getChildrenCount());
+                textViewFollowingNumber.setText("" + snapshot.getChildrenCount());
             }
 
             @Override
@@ -190,28 +195,28 @@ public class NotMyProfileFragment extends Fragment {
     }
 
     public void activateFollowListeners() {
-        textView_followersNumber.setOnClickListener(view -> {
+        textViewFollowersNumber.setOnClickListener(view -> {
             Intent intent = new Intent(getContext(), FollowersActivity.class);
             intent.putExtra("id", foreignUser.getUsername());
             intent.putExtra("title", "followers");
             startActivity(intent);
         });
 
-        textView_followersText.setOnClickListener(view -> {
+        textViewFollowersText.setOnClickListener(view -> {
             Intent intent = new Intent(getContext(), FollowersActivity.class);
             intent.putExtra("id", foreignUser.getUsername());
             intent.putExtra("title", "followers");
             startActivity(intent);
         });
 
-        textView_followingNumber.setOnClickListener(view -> {
+        textViewFollowingNumber.setOnClickListener(view -> {
             Intent intent = new Intent(getContext(), FollowersActivity.class);
             intent.putExtra("id", foreignUser.getUsername());
             intent.putExtra("title", "following");
             startActivity(intent);
         });
 
-        textView_followingText.setOnClickListener(view -> {
+        textViewFollowingText.setOnClickListener(view -> {
             Intent intent = new Intent(getContext(), FollowersActivity.class);
             intent.putExtra("id", foreignUser.getUsername());
             intent.putExtra("title", "following");

@@ -17,24 +17,24 @@ import java.util.List;
 
 public class FirebaseService {
 
-    private static final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private static final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    private static final FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+    private static final FirebaseDatabase FIREBASE_DATABASE = FirebaseDatabase.getInstance();
+    private static final FirebaseAuth FIREBASE_AUTH = FirebaseAuth.getInstance();
+    private static final FirebaseFirestore FIREBASE_FIRESTORE = FirebaseFirestore.getInstance();
 
     public static FirebaseUser getCurrentUser() {
-        return firebaseAuth.getCurrentUser();
+        return FIREBASE_AUTH.getCurrentUser();
     }
 
     public static DatabaseReference getCurrentRouterReference() {
-        return firebaseDatabase.getReference("users").child(getCurrentUser().getUid());
+        return FIREBASE_DATABASE.getReference("users").child(getCurrentUser().getUid());
     }
 
     public static DatabaseReference getCurrentOrganizationReference() {
-        return firebaseDatabase.getReference("organizations").child(getCurrentUser().getUid());
+        return FIREBASE_DATABASE.getReference("organizations").child(getCurrentUser().getUid());
     }
 
     public static void saveRoute(Route route) {
-        firebaseFirestore.collection("route").add(route).addOnSuccessListener(documentReference -> {
+        FIREBASE_FIRESTORE.collection("route").add(route).addOnSuccessListener(documentReference -> {
             String createdRouteID = documentReference.getId();
             updateRoute(createdRouteID, "id", createdRouteID);
             setGeoFireRoute(createdRouteID, route);
@@ -60,7 +60,7 @@ public class FirebaseService {
     }
 
     private static void updateRouteObject(String routeId, String attribute, Object newValue) {
-        DocumentReference reference = firebaseFirestore.collection("route").document(routeId);
+        DocumentReference reference = FIREBASE_FIRESTORE.collection("route").document(routeId);
 
         reference
                 .update(attribute, newValue)

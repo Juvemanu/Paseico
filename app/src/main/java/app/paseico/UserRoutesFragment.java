@@ -109,7 +109,7 @@ public class UserRoutesFragment extends Fragment {
                             //Obtain route theme
                             String RouteCategory = routes.get(i).getTheme();
                             System.out.println("categoria " + RouteCategory);
-                            int index = CategoryManager.ConvertCategoryToIntDrawable(RouteCategory);
+                            int index = CategoryManager.convertCategoryToIntDrawable(RouteCategory);
                             System.out.println("indice " + index);
                             filteredRoutesIcons.add(index);
                         }

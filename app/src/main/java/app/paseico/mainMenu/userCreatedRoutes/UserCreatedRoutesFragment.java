@@ -175,7 +175,7 @@ public class UserCreatedRoutesFragment extends Fragment implements MyRecyclerVie
                                         orgNames.add(organizationName);
 
                                         String routeCategory = route.getTheme();
-                                        int index = CategoryManager.ConvertCategoryToIntDrawable(routeCategory);
+                                        int index = CategoryManager.convertCategoryToIntDrawable(routeCategory);
                                         orgRoutesIcons.add(index);
 
 
@@ -245,7 +245,7 @@ public class UserCreatedRoutesFragment extends Fragment implements MyRecyclerVie
                             nearRoutesAreOrdered.add(Integer.toString(route.isOrdered()));
 
                             String routeCategory = route.getTheme();
-                            int index = CategoryManager.ConvertCategoryToIntDrawable(routeCategory);
+                            int index = CategoryManager.convertCategoryToIntDrawable(routeCategory);
                             nearRoutesIcons.add(index);
 
                             if (getActivity() != null) {

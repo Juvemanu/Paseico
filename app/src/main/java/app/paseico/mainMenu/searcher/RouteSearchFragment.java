@@ -26,13 +26,13 @@ import java.util.List;
 
 public class RouteSearchFragment extends Fragment {
 
-    private EditText et_keyWord;
-    private EditText et_numberOfPOI;
-    private EditText et_minimumOfPoints;
-    private Spinner spinner_theme;
-    private Spinner spinner_length;
-    private Spinner spinner_estimatedTime;
-    private Spinner spinner_orderedRoute;
+    private EditText etKeyWord;
+    private EditText etNumberOfPOI;
+    private EditText etMinimumOfPoints;
+    private Spinner spinnerTheme;
+    private Spinner spinnerLength;
+    private Spinner spinnerEstimatedTime;
+    private Spinner spinnerOrderedRoute;
     private List<String> keyWords;
     private String themeOfRoute;
     private int numberOfPOI;
@@ -54,13 +54,13 @@ public class RouteSearchFragment extends Fragment {
         // Inflate the layout for this fragment
         View fragmentSearchLayout = inflater.inflate(R.layout.fragment_route_search, container, false);
 
-        et_keyWord = fragmentSearchLayout.findViewById(R.id.editText_keyWord);
-        et_numberOfPOI = fragmentSearchLayout.findViewById(R.id.editText_minimumNumberOfPOI);
-        et_minimumOfPoints = fragmentSearchLayout.findViewById(R.id.editText_minimumOfPoints);
-        spinner_theme = fragmentSearchLayout.findViewById(R.id.spinner_route_theme);
-        spinner_length = fragmentSearchLayout.findViewById(R.id.spinner_route_length);
-        spinner_estimatedTime = fragmentSearchLayout.findViewById(R.id.spinner_route_estimated_time);
-        spinner_orderedRoute = fragmentSearchLayout.findViewById(R.id.spinner_orderedRoute);
+        etKeyWord = fragmentSearchLayout.findViewById(R.id.editText_keyWord);
+        etNumberOfPOI = fragmentSearchLayout.findViewById(R.id.editText_minimumNumberOfPOI);
+        etMinimumOfPoints = fragmentSearchLayout.findViewById(R.id.editText_minimumOfPoints);
+        spinnerTheme = fragmentSearchLayout.findViewById(R.id.spinner_route_theme);
+        spinnerLength = fragmentSearchLayout.findViewById(R.id.spinner_route_length);
+        spinnerEstimatedTime = fragmentSearchLayout.findViewById(R.id.spinner_route_estimated_time);
+        spinnerOrderedRoute = fragmentSearchLayout.findViewById(R.id.spinner_orderedRoute);
 
         routeList = new ArrayList<>();
 
@@ -121,23 +121,23 @@ public class RouteSearchFragment extends Fragment {
     }
 
     private void assignValueOfFilterVariables() {
-        if (et_numberOfPOI.getText().toString() != "")
-            numberOfPOI = Integer.parseInt(et_numberOfPOI.getText().toString());
+        if (etNumberOfPOI.getText().toString() != "")
+            numberOfPOI = Integer.parseInt(etNumberOfPOI.getText().toString());
         else
             numberOfPOI = -1;
 
-        if (et_minimumOfPoints.getText().toString() != "")
-            minimumOfPoints = Integer.parseInt(et_minimumOfPoints.getText().toString());
+        if (etMinimumOfPoints.getText().toString() != "")
+            minimumOfPoints = Integer.parseInt(etMinimumOfPoints.getText().toString());
         else
             minimumOfPoints = -1;
 
-        keyWords = Arrays.asList(et_keyWord.getText().toString().trim().split("\\s+"));
+        keyWords = Arrays.asList(etKeyWord.getText().toString().trim().split("\\s+"));
 
-        themeOfRoute = spinner_theme.getSelectedItem().toString();
+        themeOfRoute = spinnerTheme.getSelectedItem().toString();
         if (themeOfRoute == getString(R.string.no_theme_choice))
             themeOfRoute = null;
 
-        String estimatedTimeRange = spinner_estimatedTime.getSelectedItem().toString();
+        String estimatedTimeRange = spinnerEstimatedTime.getSelectedItem().toString();
         if (estimatedTimeRange != getString(R.string.default_spinner_choice)) {
             if (estimatedTimeRange == getString(R.string.lt0_5)) {
                 minimumTime = 0;
@@ -155,7 +155,7 @@ public class RouteSearchFragment extends Fragment {
             maximumTime = Double.MAX_VALUE;
         }
 
-        String lengthRange = spinner_length.getSelectedItem().toString();
+        String lengthRange = spinnerLength.getSelectedItem().toString();
         if (lengthRange != getString(R.string.default_spinner_choice)) {
             if (lengthRange == getString(R.string.lt1)) {
                 minimumOfLength = 0;
@@ -173,7 +173,7 @@ public class RouteSearchFragment extends Fragment {
             maximumOfLength = Double.MAX_VALUE;
         }
 
-        String orderedRoute = spinner_orderedRoute.getSelectedItem().toString();
+        String orderedRoute = spinnerOrderedRoute.getSelectedItem().toString();
         if (orderedRoute.equals(getString(R.string.default_spinner_choice))) {
             this.isOrderedRoute = -1;
             this.noFilterOrderedRoutes = true;
