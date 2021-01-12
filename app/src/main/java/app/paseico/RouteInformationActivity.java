@@ -5,25 +5,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-
+import android.widget.*;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.gms.maps.model.LatLng;
+import app.paseico.data.PointOfInterest;
+import app.paseico.data.Route;
 import com.google.firebase.database.annotations.NotNull;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
-import app.paseico.data.PointOfInterest;
-import app.paseico.data.Route;
 
 public class RouteInformationActivity extends AppCompatActivity {
 
@@ -35,6 +26,7 @@ public class RouteInformationActivity extends AppCompatActivity {
     private TextView textView_ordered;
     private ImageView themeIcon;
     private ListView listView_poiList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +77,7 @@ public class RouteInformationActivity extends AppCompatActivity {
         String length = kms + " km y " + meters + " metros";
         int hours = ((int) route.getEstimatedTime()) / 60;
         int minutes = ((int) route.getEstimatedTime()) % 60;
-        String estimatedTime = hours + " horas y " + minutes + " minutos" ;
+        String estimatedTime = hours + " horas y " + minutes + " minutos";
         ArrayList<PointOfInterest> pois = (ArrayList) route.getPointsOfInterest();
         String theme = (route.getTheme() == null) ? "Sin temática" : route.getTheme();
 
@@ -100,7 +92,7 @@ public class RouteInformationActivity extends AppCompatActivity {
 
         if (route.isOrdered() == 1) {
             textView_ordered.setText(R.string.yes);
-        }else{
+        } else {
             textView_ordered.setText(R.string.no);
         }
 
@@ -111,7 +103,7 @@ public class RouteInformationActivity extends AppCompatActivity {
             pointsOfInterestNames.add(pois.get(i).getName());
         }
 
-        ArrayAdapter<String> pointsOfInterestNamesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,  pointsOfInterestNames);
+        ArrayAdapter<String> pointsOfInterestNamesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, pointsOfInterestNames);
         listView_poiList.setAdapter(pointsOfInterestNamesAdapter);
 
         listView_poiList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -132,12 +124,13 @@ public class RouteInformationActivity extends AppCompatActivity {
         });
         return route;
     }
-    public void checkLocation(Route route){
-        final LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
 
-        if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+    public void checkLocation(Route route) {
+        final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             buildAlertMessageNoGps();
-        } else{
+        } else {
             Intent startRouteIntent = new Intent(RouteInformationActivity.this,
                     route.isOrdered() == 1 ? RouteRunnerOrderedActivity.class : RouteRunnerNotOrderedActivity.class);
             startRouteIntent.putExtra("route", route);
@@ -147,6 +140,7 @@ public class RouteInformationActivity extends AppCompatActivity {
 
 
     }
+
     private void buildAlertMessageNoGps() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Para poder usar Paseico necesitas activar la ubicación")

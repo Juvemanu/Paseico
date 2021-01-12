@@ -62,22 +62,22 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void checkRegister(){
+    private void checkRegister() {
 
-         name = etName.getText().toString();
-         surname = etSurname.getText().toString();
-         email = etEmail.getText().toString();
-         username = etUsername.getText().toString();
-         password = etPassword.getText().toString();
-         passwordConf = etPasswordConf.getText().toString();
-        if(!TextUtils.isEmpty(etName.getText().toString())
-                &&!TextUtils.isEmpty(etSurname.getText().toString())
-                &&!TextUtils.isEmpty(etEmail.getText().toString())
-                &&!TextUtils.isEmpty(etUsername.getText().toString())
-                &&!TextUtils.isEmpty(etPassword.getText().toString())
-                &&!TextUtils.isEmpty(etPasswordConf.getText().toString())
-        ){ //Check that the fields aren't empty
-            if(password.length()>=6) {
+        name = etName.getText().toString();
+        surname = etSurname.getText().toString();
+        email = etEmail.getText().toString();
+        username = etUsername.getText().toString();
+        password = etPassword.getText().toString();
+        passwordConf = etPasswordConf.getText().toString();
+        if (!TextUtils.isEmpty(etName.getText().toString())
+                && !TextUtils.isEmpty(etSurname.getText().toString())
+                && !TextUtils.isEmpty(etEmail.getText().toString())
+                && !TextUtils.isEmpty(etUsername.getText().toString())
+                && !TextUtils.isEmpty(etPassword.getText().toString())
+                && !TextUtils.isEmpty(etPasswordConf.getText().toString())
+        ) { //Check that the fields aren't empty
+            if (password.length() >= 6) {
                 if (password.equals(passwordConf)) { //Check if passwords match
                     DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
                     DatabaseReference userNameRef = ref.child("users");
@@ -85,10 +85,10 @@ public class RegisterActivity extends AppCompatActivity {
                     ValueEventListener eventListener = new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            if(username.contains(".") || username.contains("#") || username.contains("$") || username.contains("[") || username.contains(".]") ){
+                            if (username.contains(".") || username.contains("#") || username.contains("$") || username.contains("[") || username.contains(".]")) {
                                 Toast.makeText(RegisterActivity.this, "Error: No puedes usar en el nombre de usuario los siguientes caracteres: '.'  '# ' '$'  '['  ']' ",
                                         Toast.LENGTH_SHORT).show();
-                            }else {
+                            } else {
                                 if (!dataSnapshot.exists()) {
                                     //create new user
                                     submitRegister(name, surname, email, username, password);
@@ -104,7 +104,8 @@ public class RegisterActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onCancelled(DatabaseError databaseError) {}
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
                     };
                     queries.addListenerForSingleValueEvent(eventListener);
                 } else { //Passwords doesn't match
@@ -115,7 +116,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
                 }
-            }else{
+            } else {
                 Context context = getApplicationContext();
                 CharSequence text = "La contraseña debe contener mínimo 6 caracteres";
                 int duration = Toast.LENGTH_SHORT;
@@ -133,38 +134,38 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    private void submitRegister(String name, String surname, String email, String username, String password){
+    private void submitRegister(String name, String surname, String email, String username, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                UserDao uDao = new UserDao();
-                                uDao.addUser(user, username.toLowerCase(), name, surname);
-                                Toast.makeText(RegisterActivity.this, "Registro completado!",
-                                        Toast.LENGTH_SHORT).show();
-                                Handler handler = new Handler();
-                                handler.postDelayed(new Runnable() { //Wait 2 secs to load the next activity (LoginScreen)
-                                    @Override
-                                    public void run() {
-                                        try {
-                                            FirebaseAuth.getInstance().signOut();
-                                            Intent intent = new Intent(RegisterActivity.this, LogInActivity.class);
-                                            startActivity(intent);
-                                            finish();
-                                        } catch (Exception e) {
-                                        }
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            UserDao uDao = new UserDao();
+                            uDao.addUser(user, username.toLowerCase(), name, surname);
+                            Toast.makeText(RegisterActivity.this, "Registro completado!",
+                                    Toast.LENGTH_SHORT).show();
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() { //Wait 2 secs to load the next activity (LoginScreen)
+                                @Override
+                                public void run() {
+                                    try {
+                                        FirebaseAuth.getInstance().signOut();
+                                        Intent intent = new Intent(RegisterActivity.this, LogInActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    } catch (Exception e) {
                                     }
-                                }, 2000);
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Toast.makeText(RegisterActivity.this, "Error: El correo electrónico ya existe",
-                                        Toast.LENGTH_SHORT).show();
-                            }
+                                }
+                            }, 2000);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(RegisterActivity.this, "Error: El correo electrónico ya existe",
+                                    Toast.LENGTH_SHORT).show();
                         }
+                    }
 
 
                 });

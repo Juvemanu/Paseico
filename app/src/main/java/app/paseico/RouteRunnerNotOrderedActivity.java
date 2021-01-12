@@ -1,7 +1,6 @@
 package app.paseico;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
@@ -9,7 +8,10 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.BaseAdapter;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import app.paseico.data.PointOfInterest;
 import app.paseico.utils.LocationPermissionRequester;

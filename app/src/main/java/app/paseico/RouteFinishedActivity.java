@@ -1,28 +1,20 @@
 package app.paseico;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.List;
-
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import app.paseico.data.PointOfInterest;
 import app.paseico.data.Route;
 import app.paseico.data.Router;
-import app.paseico.data.User;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.*;
+
+import java.util.List;
 
 public class RouteFinishedActivity extends AppCompatActivity {
 
@@ -66,7 +58,9 @@ public class RouteFinishedActivity extends AppCompatActivity {
         TextView cantPuntos = findViewById(R.id.textViewRouteFinishedPoints);
 
         nombreRuta = route.getName();
-        if (nombreRuta != null){nombreRutaTV.setText(nombreRuta);}
+        if (nombreRuta != null) {
+            nombreRutaTV.setText(nombreRuta);
+        }
 
         rewpoints = route.getRewardPoints();
         cantPuntos.setText("Puntos: " + rewpoints);

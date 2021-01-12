@@ -84,9 +84,13 @@ public class Route implements Parcelable {
         this.estimatedTime = estimatedTime;
     }
 
-    public int isOrdered() { return ordered;}
+    public int isOrdered() {
+        return ordered;
+    }
 
-    public void setOrdered(int value) { ordered = value%2;  }
+    public void setOrdered(int value) {
+        ordered = value % 2;
+    }
 
     public int getRewardPoints() {
         return rewardPoints;
@@ -114,16 +118,16 @@ public class Route implements Parcelable {
 
     @Override
     public @NotNull String toString() {
-        return "Route{" +
-                "name='" + name + '\'' +
-                "authorId=" + authorId + '\'' +
-                ", theme='" + theme + '\'' +
-                ", length=" + length +
-                ", estimatedTime=" + estimatedTime +
-                ", rewardsPoints=" + rewardPoints +
-                ", pointsOfInterest=" + pointsOfInterest +
-                ", ordered=" + ordered +
-                '}';
+        return "Route{"
+                + "name='" + name + '\''
+                + "authorId=" + authorId + '\''
+                + ", theme='" + theme + '\''
+                + ", length=" + length
+                + ", estimatedTime=" + estimatedTime
+                + ", rewardsPoints=" + rewardPoints
+                + ", pointsOfInterest=" + pointsOfInterest
+                + ", ordered=" + ordered
+                + '}';
     }
 
     private void readFromParcel(Parcel in) {

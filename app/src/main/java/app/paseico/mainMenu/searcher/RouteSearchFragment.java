@@ -44,7 +44,7 @@ public class RouteSearchFragment extends Fragment {
     List<Route> routeList;
     private int isOrderedRoute; // 1 if is ordered. 0 If is not.
     private boolean noFilterOrderedRoutes; // Check if the user wants to filter by ordered or not ordered routes.
-                                        // If is true, the program will not filter by this attribute.
+    // If is true, the program will not filter by this attribute.
 
     @Override
     public View onCreateView(
@@ -174,10 +174,10 @@ public class RouteSearchFragment extends Fragment {
         }
 
         String orderedRoute = spinner_orderedRoute.getSelectedItem().toString();
-        if(orderedRoute.equals(getString(R.string.default_spinner_choice))){
+        if (orderedRoute.equals(getString(R.string.default_spinner_choice))) {
             this.isOrderedRoute = -1;
             this.noFilterOrderedRoutes = true;
-        } else if (orderedRoute.equals(getString(R.string.yes))){
+        } else if (orderedRoute.equals(getString(R.string.yes))) {
             this.isOrderedRoute = 1;
             this.noFilterOrderedRoutes = false;
         } else { // Answer is NO

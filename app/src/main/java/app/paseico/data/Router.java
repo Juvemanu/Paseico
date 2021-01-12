@@ -10,12 +10,12 @@ public class Router extends User {
      */
     private boolean hasFreeRouteCreation;
 
-    public Router(){
+    public Router() {
         super();
     }
 
-    public Router(String name, String username, String email){
-        super(name,username,email);
+    public Router(String name, String username, String email) {
+        super(name, username, email);
         this.points = 0;
         this.boost = false;
         this.boostExpires = null;
@@ -35,7 +35,7 @@ public class Router extends User {
     }
 
     public void subtractPoints(int pts) {
-        this.points -=  pts;
+        this.points -= pts;
     }
 
     public boolean isBoost() {

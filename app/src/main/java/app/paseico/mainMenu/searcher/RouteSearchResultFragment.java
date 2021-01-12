@@ -17,10 +17,11 @@ import app.paseico.R;
 import app.paseico.RouteInformationActivity;
 
 import app.paseico.data.Route;
+
 import java.util.ArrayList;
 import java.util.List;
-public class RouteSearchResultFragment extends Fragment {
 
+public class RouteSearchResultFragment extends Fragment {
 
 
     @Override
@@ -50,13 +51,13 @@ public class RouteSearchResultFragment extends Fragment {
         for (Route route : filteredRoutes) {
             filteredRoutesNames.add(route.getName());
 
-            int hours = (int) (route.getEstimatedTime()/60);
-            int minutes = (int) (route.getEstimatedTime() - (hours*60));
+            int hours = (int) (route.getEstimatedTime() / 60);
+            int minutes = (int) (route.getEstimatedTime() - (hours * 60));
             filteredRoutesEstimatedHours.add(String.valueOf(hours));
             filteredRoutesEstimatedMinutes.add(String.valueOf(minutes));
 
-            int km = (int) (route.getLength()/1000);
-            int meters = (int) (route.getLength()) - km*1000;
+            int km = (int) (route.getLength() / 1000);
+            int meters = (int) (route.getLength()) - km * 1000;
             filteredRoutesKm.add(String.valueOf(km));
             filteredRoutesMeters.add(String.valueOf(meters));
 
@@ -74,7 +75,7 @@ public class RouteSearchResultFragment extends Fragment {
 
         ListView listView_filteredRoutes = (ListView) view.findViewById(R.id.listView_filteredRoutes);
 
-        FilteredListAdapter adapter = new FilteredListAdapter(this.getContext(), filteredRoutesNames, filteredRoutesEstimatedHours, filteredRoutesEstimatedMinutes,filteredRoutesKm, filteredRoutesMeters,
+        FilteredListAdapter adapter = new FilteredListAdapter(this.getContext(), filteredRoutesNames, filteredRoutesEstimatedHours, filteredRoutesEstimatedMinutes, filteredRoutesKm, filteredRoutesMeters,
                 filteredRoutesRewardPoints, filteredRoutesIcons, filteredRoutesAreOrdered);
         listView_filteredRoutes.setAdapter(adapter);
 

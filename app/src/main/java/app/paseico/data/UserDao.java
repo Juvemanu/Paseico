@@ -43,20 +43,20 @@ public class UserDao implements IUserDao {
         String email = user.getEmail();
         String[] parts = email.split("@");
         String username = parts[0];
-        if(username.contains(".")){
-            username = username.replace(".","");
+        if (username.contains(".")) {
+            username = username.replace(".", "");
         }
-        if(username.contains("#")){
-            username = username.replace("#","");
+        if (username.contains("#")) {
+            username = username.replace("#", "");
         }
-        if(username.contains("$")){
-            username = username.replace("$","");
+        if (username.contains("$")) {
+            username = username.replace("$", "");
         }
-        if(username.contains("[")){
-            username = username.replace("[","");
+        if (username.contains("[")) {
+            username = username.replace("[", "");
         }
-        if(username.contains("]")){
-            username = username.replace("]","");
+        if (username.contains("]")) {
+            username = username.replace("]", "");
         }
         addNewUserToDatabase(user, name, username);
     }
