@@ -91,15 +91,15 @@ public class UserRoutesFragment extends Fragment {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             routes.add(document.toObject(Route.class));
                         }
-                        for (int i = 0; i < routes.size(); i++ ) {
+                        for (int i = 0; i < routes.size(); i++) {
                             filteredRoutesNames.add(routes.get(i).getName());
-                            int hours = (int) (routes.get(i).getEstimatedTime()/60);
-                            int minutes = (int) (routes.get(i).getEstimatedTime() - (hours*60));
+                            int hours = (int) (routes.get(i).getEstimatedTime() / 60);
+                            int minutes = (int) (routes.get(i).getEstimatedTime() - (hours * 60));
                             filteredRoutesEstimatedHours.add(String.valueOf(hours));
                             filteredRoutesEstimatedMinutes.add(String.valueOf(minutes));
 
-                            int km = (int) (routes.get(i).getLength()/1000);
-                            int meters = (int) (routes.get(i).getLength()) - km*1000;
+                            int km = (int) (routes.get(i).getLength() / 1000);
+                            int meters = (int) (routes.get(i).getLength()) - km * 1000;
                             filteredRoutesKm.add(String.valueOf(km));
                             filteredRoutesMeters.add(String.valueOf(meters));
 
@@ -113,10 +113,10 @@ public class UserRoutesFragment extends Fragment {
                             System.out.println("indice " + index);
                             filteredRoutesIcons.add(index);
                         }
-                       // MyItemRecyclerViewAdapter adapter = new MyItemRecyclerViewAdapter(this, routeNames);
+                        // MyItemRecyclerViewAdapter adapter = new MyItemRecyclerViewAdapter(this, routeNames);
                         //ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, routeNames);
 
-                        FilteredListAdapter adapter = new FilteredListAdapter(this.getContext(), filteredRoutesNames, filteredRoutesEstimatedHours, filteredRoutesEstimatedMinutes,filteredRoutesKm, filteredRoutesMeters,
+                        FilteredListAdapter adapter = new FilteredListAdapter(this.getContext(), filteredRoutesNames, filteredRoutesEstimatedHours, filteredRoutesEstimatedMinutes, filteredRoutesKm, filteredRoutesMeters,
                                 filteredRoutesRewardPoints, filteredRoutesIcons, filteredRoutesAreOrdered);
                         userRoutesList.setAdapter(adapter);
                     }
@@ -134,7 +134,6 @@ public class UserRoutesFragment extends Fragment {
         });
         return view;
     }
-
 
 
 }

@@ -7,10 +7,10 @@ public class Discount {
     private String organiID;
 
 
-
     private String nodeId;
 
-    public Discount() {}
+    public Discount() {
+    }
 
     public Discount(String n, int p, int pts, String organiID, String node) {
         this.name = n;

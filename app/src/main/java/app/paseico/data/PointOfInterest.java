@@ -12,6 +12,7 @@ public class PointOfInterest implements Serializable, Parcelable {
     private boolean createdByUser;
 
     public static final Creator<PointOfInterest> CREATOR = new Creator<PointOfInterest>() {
+
         @Override
         public PointOfInterest createFromParcel(Parcel in) {
             return new PointOfInterest(in);
@@ -29,15 +30,17 @@ public class PointOfInterest implements Serializable, Parcelable {
     protected PointOfInterest(Parcel in) {
         name = in.readString();
 
-        if (in.readByte() == 0)
+        if (in.readByte() == 0) {
             latitude = null;
-        else
+        } else {
             latitude = in.readDouble();
+        }
 
-        if (in.readByte() == 0)
+        if (in.readByte() == 0) {
             longitude = null;
-        else
+        } else {
             longitude = in.readDouble();
+        }
 
         createdByUser = in.readByte() != 0;
     }
@@ -57,13 +60,17 @@ public class PointOfInterest implements Serializable, Parcelable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         PointOfInterest that = (PointOfInterest) o;
-        return name.equals(that.name) &&
-                latitude.equals(that.latitude) &&
-                longitude.equals(that.longitude);
+        return name.equals(that.name)
+                && latitude.equals(that.latitude)
+                && longitude.equals(that.longitude);
     }
 
     @Override

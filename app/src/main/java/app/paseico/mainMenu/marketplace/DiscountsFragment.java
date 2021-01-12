@@ -124,10 +124,10 @@ public class DiscountsFragment extends Fragment {
         return root;
     }
 
-    public void showDiscountCode(int index){
+    public void showDiscountCode(int index) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage("Código: " + generateDiscountCode() + "\n \n ¡Acuérdate de apuntarlo antes de cerrar esta ventana!")
-                .setTitle("Descuento de " + discounts.get(index).getName() +" canjeado!")
+                .setTitle("Descuento de " + discounts.get(index).getName() + " canjeado!")
                 .setPositiveButton("Vale!", (dialog, which) -> {
 
                 });
@@ -136,7 +136,7 @@ public class DiscountsFragment extends Fragment {
 
     }
 
-    private String generateDiscountCode(){
+    private String generateDiscountCode() {
         char[] chars = "AXZC01759".toCharArray();
         StringBuilder sb = new StringBuilder(6);
         Random random = new Random();

@@ -2,18 +2,18 @@ package app.paseico;
 
 public class CategoryManager {
 
-    public static int ConvertCategoryToIntDrawable (String category) {
+    public static int ConvertCategoryToIntDrawable(String category) {
         int iconIndex = 0;
-        //This is to test the method while there is no category defined in create new route
+        //This is to test the method while there is
+        // no category defined in create new route
         if (category == null) {
-            category ="Sin temática";
+            category = "Sin temática";
             System.out.println("categoriaEnConvert " + category);
         }
-        ////////
 
         switch (category) {
             case "Sin temática":
-                iconIndex  = R.drawable.notheme_icon;
+                iconIndex = R.drawable.notheme_icon;
                 break;
             case "Naturaleza":
                 iconIndex = R.drawable.nature_icon;
@@ -31,7 +31,7 @@ public class CategoryManager {
                 iconIndex = R.drawable.bar_icon;
                 break;
             default:
-                iconIndex  = R.drawable.notheme_icon;
+                iconIndex = R.drawable.notheme_icon;
         }
         return iconIndex;
     }
