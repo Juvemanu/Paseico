@@ -26,13 +26,13 @@ public class SearchUserFragment extends Fragment {
     private RecyclerView recyclerView;
     private UserAdapter userAdapter;
     private List<User> mUsers;
-    FirebaseUser firebaseUser ;
+    FirebaseUser firebaseUser;
     User actualUser;
     EditText search_bar;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.fragment_user_search, container,false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_user_search, container, false);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -41,7 +41,7 @@ public class SearchUserFragment extends Fragment {
         search_bar = view.findViewById(R.id.search_bar);
 
         mUsers = new ArrayList<>();
-        userAdapter = new UserAdapter(getContext(),mUsers, SearchUserFragment.this);
+        userAdapter = new UserAdapter(getContext(), mUsers, SearchUserFragment.this);
         recyclerView.setAdapter(userAdapter);
 
         FirebaseDatabase.getInstance().getReference("users").child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
@@ -50,6 +50,7 @@ public class SearchUserFragment extends Fragment {
                 actualUser = dataSnapshot.getValue(User.class);
                 readUsers();
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -75,18 +76,18 @@ public class SearchUserFragment extends Fragment {
         return view;
     }
 
-    private void searchUsers(String s){
+    private void searchUsers(String s) {
         Query query = FirebaseDatabase.getInstance().getReference("users").orderByChild("username")
                 .startAt(s)
-                .endAt(s+"\uf8ff");
+                .endAt(s + "\uf8ff");
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 mUsers.clear();
 
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     User user = snapshot.getValue(User.class);
-                    if(!user.getUsername().equals(actualUser.getUsername())){
+                    if (!user.getUsername().equals(actualUser.getUsername())) {
                         mUsers.add(user);
                     }
                 }
@@ -100,20 +101,20 @@ public class SearchUserFragment extends Fragment {
         });
     }
 
-    private void readUsers(){
+    private void readUsers() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                if(search_bar.getText().toString().equals("")){
+                if (search_bar.getText().toString().equals("")) {
                     mUsers.clear();
-                    for(DataSnapshot snapshot : datasnapshot.getChildren()){
+                    for (DataSnapshot snapshot : datasnapshot.getChildren()) {
                         User user = snapshot.getValue(User.class);
-                       //if(!user.getUsername().equals(actualUser.getUsername())){
-                           mUsers.add(user);
-                       //}
+                        //if(!user.getUsername().equals(actualUser.getUsername())){
+                        mUsers.add(user);
+                        //}
                     }
-                   userAdapter.notifyDataSetChanged();
+                    userAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -124,13 +125,13 @@ public class SearchUserFragment extends Fragment {
         });
     }
 
-    public void navigateToNotMyProfileFragment(){
+    public void navigateToNotMyProfileFragment() {
         NavDirections action = SearchUserFragmentDirections.actionNavSearchUsersToNotMyProfileFragment();
         NavHostFragment.findNavController(SearchUserFragment.this)
                 .navigate(action);
     }
 
-    public void navigateToProfileFragment(){
+    public void navigateToProfileFragment() {
         NavDirections action = SearchUserFragmentDirections.actionNavSearchUsersToNavProfile();
         NavHostFragment.findNavController(SearchUserFragment.this)
                 .navigate(action);

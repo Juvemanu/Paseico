@@ -70,7 +70,7 @@ public class FirebaseService {
         System.out.println("Updated " + attribute + " as " + newValue.toString());
     }
 
-    private static void setGeoFireRoute(String id, Route route){
+    private static void setGeoFireRoute(String id, Route route) {
         CollectionReference ref = FirebaseFirestore.getInstance().collection("geofire");
         List<PointOfInterest> pois = route.getPointsOfInterest();
         PointOfInterest first = pois.get(0);

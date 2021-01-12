@@ -27,8 +27,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
-    public MyRecyclerViewAdapter(Context context, List<String> names, List<String> estimatedHours, List<String> estimatedMinutes,List<String> kms, List<String> meters, List<String> points,
-                                 List<Integer> icons, List<String> areOrdered, List<String> organization){
+    public MyRecyclerViewAdapter(Context context, List<String> names, List<String> estimatedHours, List<String> estimatedMinutes, List<String> kms, List<String> meters, List<String> points,
+                                 List<Integer> icons, List<String> areOrdered, List<String> organization) {
         this.mInflater = LayoutInflater.from(context);
         this.names = names;
         this.estimatedHours = estimatedHours;
@@ -59,7 +59,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         holder.organizationName.setText(organization.get(position));
 
         String isOrdered = areOrdered.get(position);
-        if (isOrdered.equals("0")){
+        if (isOrdered.equals("0")) {
             isOrdered = "No";
         } else {
             isOrdered = "Sí";

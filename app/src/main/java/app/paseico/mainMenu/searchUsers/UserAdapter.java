@@ -13,7 +13,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import app.paseico.R;
 import app.paseico.data.User;
-import app.paseico.mainMenu.profile.ProfileFragment;
 import app.paseico.service.FirebaseService;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;

@@ -1,24 +1,17 @@
 package app.paseico;
 
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
-
-import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
-
-import app.paseico.service.FirebaseService;
 
 public class MainMenuActivity extends AppCompatActivity {
 

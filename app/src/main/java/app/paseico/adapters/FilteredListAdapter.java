@@ -67,7 +67,7 @@ public class FilteredListAdapter extends ArrayAdapter<String> {
         myPoints.setText(points.get(position));
 
         String isOrdered = areOrdered.get(position);
-        if (isOrdered.equals("0")){
+        if (isOrdered.equals("0")) {
             isOrdered = "No";
         } else {
             isOrdered = "Sí";
